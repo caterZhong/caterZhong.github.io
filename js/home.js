@@ -1,3 +1,4 @@
+
 $(function(){
 	// if(sessionStorage.nav == null){
 	// 	sessionStorage.nav = "first";
@@ -19,18 +20,6 @@ $(function(){
 		$(category).parent().parent().slideDown(80);
 		// $(category).parent().parent().slideDown(80);
 	}
-
-	// 多说公共JS代码 start (一个网页只需插入一次)
-	var duoshuoQuery = {short_name:"cater"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0] 
-       || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-    // 多说公共JS代码 end 
 
 	$(".category-first").bind("click",function(){
 		// $(this).children("ul").css("height","0");

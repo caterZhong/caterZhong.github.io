@@ -22,3 +22,10 @@ markdown: kramdown
 
 permalink: /:year/:month/:day/:title
 
+comments :
+     provider : duoshuo
+     duoshuo : 
+     short_name : cater
+
+
+
