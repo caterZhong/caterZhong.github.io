@@ -1,0 +1,182 @@
+@font-face {
+  font-family: 'iconfont';
+  src: url('//at.alicdn.com/t/font_1451492381_7394438.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/font_1451492381_7394438.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/font_1451492381_7394438.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/font_1451492381_7394438.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/font_1451492381_7394438.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+                    
+
+body{
+	font: 12px/200% "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"宋体";
+}
+
+.bg{
+	background-image: url(../images/moutain.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	width:100%;
+	height: 300px;
+}
+
+.main-content{
+	width:1000px;
+	padding:0 5px 0;
+	margin:0 auto;
+}
+
+.content-left{
+	float:left;
+	width:190px;
+	padding: 0 60px 0 0;
+	margin-top:-53px;
+}
+
+.header-img img{
+	width:96px;
+	height: 96px;
+	border:5px solid #fff;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+}
+
+.blogger-name{
+	margin-top:20px;
+	line-height: 32px;
+}
+
+.blogger-name a{
+	font-size: 20px;
+	color:#666;
+	display: inline-block;
+	letter-spacing: 2px;
+}
+
+.blogger-introduce{
+	color:#aaa;
+	margin-top:20px;
+	/*font-size: 12px;*/
+}
+
+.blog-nav{
+	margin:30px 0 0 0;
+	border-top:1px solid #eee;
+	padding:25px 0 0;
+}
+
+.blog-nav li{
+	padding: 0 0 8px;
+	list-style: none;
+	/*height: 24px;*/
+	/*overflow: hidden;*/
+}
+
+.blog-nav>li>ul{
+	display: none;
+	margin-left:15px;
+}
+
+/*.blog-nav a*/
+
+.blog-nav a{
+	color:#aaa;
+	padding:5px;
+	border-radius:3px;
+	/*display: block;*/
+}
+
+.blog-nav a:hover{
+	height: 24px;
+	text-decoration: none;
+}
+
+a.nav-active{
+	background-color: #444;
+	color:#fff;
+}
+
+a.category-active{
+	color:#059CD5;;
+}
+
+.post-count-superscript{
+	vertical-align: super;
+	color:#56AAC3;
+	/*font-size: 10px;*/
+}
+
+.post-count-superscript:before{
+	content:" ";
+}
+
+.content-right{
+	float:left;
+	width:650px;
+	padding:79px 100px 0 0;
+	clear:right;
+}
+
+.post-title .post-link{
+	color:#444;
+}
+
+.post-content{
+	font-size: 14px;
+	color:#666;
+}
+
+.post-meta{
+	font-size: 12px;
+	color:#aaa;
+}
+
+.tag-box{
+	float:right;
+	font-size: 12px;
+	color:#aaa;
+	/*text-align: left;*/
+}
+
+.tag-box>i{
+	font-size: 16px;
+	transform:translate(0px,2px);
+}
+
+.tag-box a{
+	color:#aaa;
+}
+
+
+
+.blog-footer{
+	color:#ccc;
+	clear:both;
+	padding-top:50px;
+	width:100%;
+	text-align: center;
+}
+
+.tag-title{
+	padding:0 0 15px 0;
+	border-bottom: 1px solid #eee;
+}
+
+.tag-title>i{
+	font-size: 25px;
+	color:#aaa;
+}
+
+.tag-title>i:after{
+	content: ' ';
+}
+

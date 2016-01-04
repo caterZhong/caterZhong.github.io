@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+  {% include head.html %}
+
+  <body>
+
+    <!-- 大背景 -->
+    <div class="bg">
+    &nbsp;
+    </div>
+    <!-- 大背景结束 -->
+    
+    <!-- 主内容区开始 -->
+    <div class="main-content">
+      <!-- 左边内容区开始 -->
+      <div class="content-left">
+        <div class="header-img">
+          <a href="#">
+            <img src="/images/moutain.png" alt="">
+          </a>
+        </div>
+        <h1 class="blogger-name">
+          <a href="/">cater</a>
+        </h1>
+        <p class="blogger-introduce">音乐、运动、IT、生活。。。</p>
+        <ul class="blog-nav">
+          <li>
+            <a href="/" id="first" class="category-first nav">首页</a>
+          </li>
+          <li>
+            <a href="#" id="study" class="category-first">学习</a>
+            <ul>
+              {% for category in site.categories %}
+                {% assign cat = category[0] | split:"-"| first %}
+                {% if  cat == "study" %}
+                    <li class="blog-cat"><a href="/blog/category/{{ category[0] | split:"-" | last }}" class="category-second nav" id="category-{{ category[0] | split:"-" | last }}">{{category[0] | split:"-" | last}}</a><span class="post-count-superscript">{{ category | last | size }}</span></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </li>
+          <li>
+            <a href="/blog/category/mood" id="mood" class="category-first nav">随心</a>
+          </li>
+          <li>
+            <a href="/music/music.html" id="music" class="category-first nav">音乐</a>
+          </li>
+          <li>
+            <a href="/about/about.html" id="about" class="category-first nav">关于</a>
+          </li>
+        </ul>
+      </div>
+      <!-- 左边内容区结束 -->
+      <!-- 右边内容区开始 -->
+      <div class="content-right">
+        {{ content }}
+      </div>
+      <!-- 右边内容区结束 -->
+    </div>
+    <!-- 主内容区结束 -->
+    
+    {% include footer.html %}
+
+  </body>
+
+</html>
+
