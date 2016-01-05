@@ -30,12 +30,12 @@ $(function(){
 		}
 	});
 
-	$(".ScrollToTop").bind("click",function(){
+	$(".ScrollToTop").bind("click touchstart",function(){
 		$('html, body').animate({scrollTop:0}, 'fast');
 		return false;
 	})
 
-	$(".category-first").bind("click",function(){
+	$(".category-first").bind("click touchstart",function(){
 		// $(this).children("ul").css("height","0");
 		if($(this).hasClass("nav")){
 			sessionStorage.nav = $(this).attr("id");
@@ -52,7 +52,7 @@ $(function(){
 		
 	})
 
-	$(".category-second").bind("click",function(){
+	$(".category-second").bind("click touchstart",function(){
 		sessionStorage.category = $(this).attr("id");
 		sessionStorage.nav = $(this).parent().parent().prev().attr("id");
 	})
