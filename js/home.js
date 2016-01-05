@@ -13,7 +13,7 @@ $(function(){
 		default:$("#first").addClass("nav-active");break;
 	}
 
-	if(sessionStorage.category != null){
+	if(sessionStorage.category != null &&  $(document).width()>500){
 		console.log(sessionStorage.nav);
 		var category = $("#" + sessionStorage.category);
 		$(category).addClass("category-active");
@@ -23,38 +23,66 @@ $(function(){
 
 	$(window).scroll(function(){
 		var x = document.body.scrollTop||document.documentElement.scrollTop; 
-		if(x>150){
-			$(".ScrollToTop").fadeIn();
+		// console.log(x);
+		if(x>150 && $(document).width()<=500){
+			$(".blog-nav").addClass("down");
 		}else{
-			$(".ScrollToTop").fadeOut();
+			$(".blog-nav").removeClass("down");
+		}
+		if(x>150){
+			$(".scrollToTop").fadeIn();
+		}else{
+			$(".scrollToTop").fadeOut();
 		}
 	});
 
-	$(".ScrollToTop").bind("click touchstart",function(){
+	$(".scrollToTop").bind("click touchstart",function(){
 		$('html, body').animate({scrollTop:0}, 'fast');
 		return false;
 	})
 
+	$(".blog-nav").bind("click touchstart",function(){
+		$(".mask").trigger("touchstart");
+	})
+
 	$(".category-first").bind("click touchstart",function(){
-		// $(this).children("ul").css("height","0");
+		
 		if($(this).hasClass("nav")){
 			sessionStorage.nav = $(this).attr("id");
 			sessionStorage.category = null;
 		}else{
-			if($(this).next("ul").is(':hidden') ){
-				$(this).next("ul").slideDown(80);
+			// console.log($(this).nextAll("ul"));
+			if($(this).nextAll("ul").is(':hidden') ){
+				console.log("yes");
+				$(this).next().slideDown(10);
+				$(this).nextAll("ul").slideDown(80);
 			}else{
-				$(this).next("ul").slideUp(80);
+				$(this).nextAll("ul").slideUp(80);
+				$(this).next().slideUp(90);
+			}
+			var screenWidth = $(document).width();
+			if(screenWidth <= 500){
+				$(".mask").show();
 			}
 			return false;
 		}
-		
-		
 	})
 
+	$(".mask").bind("touchstart",function(){
+		$(this).hide();
+		$(".blog-nav>li>ul").slideUp(80);
+		$(".blog-nav .arrow").slideUp(90);
+		return false;
+	});	
+
 	$(".category-second").bind("click touchstart",function(){
-		sessionStorage.category = $(this).attr("id");
-		sessionStorage.nav = $(this).parent().parent().prev().attr("id");
+		console.log("点击到了");
+	})
+
+	$(".blog-cat").bind("click touchstart",function(){
+		sessionStorage.category = $(this).children().attr("id");
+		sessionStorage.nav = $(this).parent().prevAll("a").attr("id");
+		$(".mask").trigger("touchstart");
 	})
 
 });
