@@ -21,6 +21,20 @@ $(function(){
 		// $(category).parent().parent().slideDown(80);
 	}
 
+	$(window).scroll(function(){
+		var x = document.body.scrollTop||document.documentElement.scrollTop; 
+		if(x>150){
+			$(".ScrollToTop").fadeIn();
+		}else{
+			$(".ScrollToTop").fadeOut();
+		}
+	});
+
+	$(".ScrollToTop").bind("click",function(){
+		$('html, body').animate({scrollTop:0}, 'fast');
+		return false;
+	})
+
 	$(".category-first").bind("click",function(){
 		// $(this).children("ul").css("height","0");
 		if($(this).hasClass("nav")){
