@@ -74,10 +74,18 @@ body{
 
 }
 */
+
+.header-img>a{
+	display: block;
+}
+
+.header-img>a>img{
+	display: block;
+}
 .header-img img{
 	width:96px;
 	height: 96px;
-	display: inline-block;
+	/*display: inline-block;*/
 	border:5px solid #fff;
 	-moz-border-radius:50%;
 	-o-border-radius:50%;
