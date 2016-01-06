@@ -34,6 +34,13 @@ body{
 a:hover{
 	text-decoration: none;
 	color:#059CD5;
+	background-color: rgba("68,68,68,0.7");
+}
+
+a:active{
+	/*color:#;*/
+	opacity: 0.8;
+	text-decoration: none;
 }
 
 .bg{

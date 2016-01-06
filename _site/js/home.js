@@ -17,7 +17,7 @@ $(function(){
 		console.log(sessionStorage.nav);
 		var category = $("#" + sessionStorage.category);
 		$(category).addClass("category-active");
-		$(category).parent().parent().slideDown(80);
+		$(category).parent().parent().slideDown(40);
 		// $(category).parent().parent().slideDown(80);
 	}
 
@@ -51,14 +51,12 @@ $(function(){
 			sessionStorage.nav = $(this).attr("id");
 			sessionStorage.category = null;
 		}else{
-			// console.log($(this).nextAll("ul"));
 			if($(this).nextAll("ul").is(':hidden') ){
-				console.log("yes");
-				$(this).next().slideDown(10);
-				$(this).nextAll("ul").slideDown(80);
+				$(this).next().slideDown(5);
+				$(this).nextAll("ul").slideDown(40);
 			}else{
-				$(this).nextAll("ul").slideUp(80);
-				$(this).next().slideUp(90);
+				$(this).nextAll("ul").slideUp(40);
+				$(this).next().slideUp(45);
 			}
 			var screenWidth = $(document).width();
 			if(screenWidth <= 500){
@@ -80,17 +78,10 @@ $(function(){
 		sessionStorage.nav = $(this).parent().parent().prevAll("a").attr("id");
 		$(".mask").trigger("touchstart");
 		event.stopPropagation(); 
-		// return false;
 	})
 
 	$(".blog-cat").bind("click touchstart",function(event){
-		// console.log("1");
-		// event.stopPropagation(); 
 		$(this).children(".category-second").trigger("touchstart");//.trigger("touchstart");
-		// sessionStorage.category = $(this).children().attr("id");
-		// sessionStorage.nav = $(this).parent().prevAll("a").attr("id");
-		// $(".mask").trigger("touchstart");
-		// return false;
 	})
 
 });
