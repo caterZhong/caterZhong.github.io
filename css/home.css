@@ -86,7 +86,7 @@ body{
 	width:96px;
 	height: 96px;
 	/*display: inline-block;*/
-	border:5px solid #fff;
+	border:1px solid #000;
 	-moz-border-radius:50%;
 	-o-border-radius:50%;
 	-webkit-border-radius:48px;
