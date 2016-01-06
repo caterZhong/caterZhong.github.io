@@ -235,6 +235,7 @@ a.category-active{
 	.content-right{
 		float:left;
 		width:66%;
+		margin:0 auto;
 		width:-webkit-calc(81% - (80px));
 		width:-moz-calc(81% - (80px));
 		width:-o-calc(81% - (80px));
