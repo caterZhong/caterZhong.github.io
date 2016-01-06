@@ -234,7 +234,7 @@ a.category-active{
 
 	.content-right{
 		float:left;
-		width:70%;
+		width:66%;
 		width:-webkit-calc(81% - (80px));
 		width:-moz-calc(81% - (80px));
 		width:-o-calc(81% - (80px));
