@@ -31,11 +31,11 @@ body{
 	display: block;
 }
 
-a:active{
+/*a:active{
 	opacity: 0.8;
 	color:#fff;
 }
-
+*/
 .bg{
 	background-image: url(../images/moutain.png);
 	background-size: cover;
@@ -64,7 +64,7 @@ a:active{
 .header-img img{
 	width:96px;
 	height: 96px;
-	border:5px solid #fff;
+	border:5px solid #000;
 	-moz-border-radius:50%;
 	-o-border-radius:50%;
 	-webkit-border-radius:48px;
@@ -138,10 +138,10 @@ a:active{
 	border-radius:3px;
 }
 
-.blog-nav a:hover{
+/*.blog-nav a:hover{
 	height: 24px;
 	text-decoration: none;
-}
+}*/
 
 .blog-nav a.nav-active{
 	background-color: #444;
@@ -278,6 +278,7 @@ a.category-active{
 		position: absolute;
 		top:20px;
 		left:0;
+		/*display: block;*/
 	}
 
 	.blog-nav a{
@@ -307,8 +308,9 @@ a.category-active{
 		margin:0;
 		/*margin-top:10px;*/
 		padding:0px;
-		width:150px;
-		background-color: #888;/*#555;*/
+		/*width:150px;*/
+		overflow: hidden;
+		/*background-color: #888;/*#555;*/
 		text-align: left;
 		font-size: 1.3rem;
 		z-index: 1001;
@@ -319,18 +321,31 @@ a.category-active{
 	}
 	
 	.blog-nav .blog-cat{
-		padding:8px 10px;
+		padding:0;
 		margin:0;
 		line-height:normal;
+		width: 100%;
+		overflow: hidden;
 	}
 
-	.blog-cat:hover{
-		
-		background-color: #666;
+	/*.blog-cat:hover{
+		padding:0;
+		margin:0;
 	}
-
+*/
 	.blog-cat a{
-		/*color:#fff;*/
+		display: inline-block;
+		/*width:100%;*/
+		padding:8px 10px;
+		color:#fff;
+		background-color: #888;
+		width: 150px;
+	}
+
+	.blog-cat a:hover,.blog-cat a:active{
+		display: inline-block;
+		/*width:100%;*/
+		/*padding:8px 10px;*/
 		color:#fff;
 	}
 
@@ -419,39 +434,6 @@ a.category-active{
 
 .tag-title>i:after{
 	content: ' ';
-}
-
-#ds-thread #ds-reset li.ds-tab a.ds-comments-tab-weibo{
-	display: none;
-}
-
-#ds-thread #ds-reset li.ds-tab a{
-	font-size: 12px;
-	padding:5px 7px;
-}
-
-#ds-reset .ds-gradient-bg{
-	background: none;
-}
-
-#ds-thread #ds-reset .ds-post-options{
-	margin-right: 60px;
-}
-
-#ds-thread #ds-reset .ds-post-button{
-	/*right: 1px;*/
-
-	width:60px;
-	color:#fff;
-	background: none;
-	background-color:#059CD5;
-	border:none;
-	text-shadow:none;
-}
-
-#ds-thread #ds-reset .ds-post-button:hover{
-	background-color:#428bca;
-	color:#fff;
 }
 
 .scrollToTop{

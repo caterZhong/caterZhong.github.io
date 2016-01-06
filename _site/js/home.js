@@ -75,14 +75,22 @@ $(function(){
 		return false;
 	});	
 
-	$(".category-second").bind("click touchstart",function(){
-		console.log("点击到了");
+	$(".category-second").bind("click touchstart",function(event){
+		sessionStorage.category = $(this).attr("id");
+		sessionStorage.nav = $(this).parent().parent().prevAll("a").attr("id");
+		$(".mask").trigger("touchstart");
+		event.stopPropagation(); 
+		// return false;
 	})
 
-	$(".blog-cat").bind("click touchstart",function(){
-		sessionStorage.category = $(this).children().attr("id");
-		sessionStorage.nav = $(this).parent().prevAll("a").attr("id");
-		$(".mask").trigger("touchstart");
+	$(".blog-cat").bind("click touchstart",function(event){
+		// console.log("1");
+		// event.stopPropagation(); 
+		$(this).children(".category-second").trigger("touchstart");//.trigger("touchstart");
+		// sessionStorage.category = $(this).children().attr("id");
+		// sessionStorage.nav = $(this).parent().prevAll("a").attr("id");
+		// $(".mask").trigger("touchstart");
+		// return false;
 	})
 
 });

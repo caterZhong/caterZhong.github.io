@@ -36,7 +36,7 @@
               {% for category in site.categories %}
                 {% assign cat = category[0] | split:"-"| first %}
                 {% if  cat == "study" %}
-                    <li class="blog-cat"><a href="/blog/category/{{ category[0] | split:"-" | last }}" class="category-second nav" id="category-{{ category[0] | split:"-" | last }}">{{category[0] | split:"-" | last}}</a><span class="post-count-superscript">{{ category | last | size }}</span></li>
+                    <li class="blog-cat"><a href="/blog/category/{{ category[0] | split:"-" | last }}" class="category-second nav" id="category-{{ category[0] | split:"-" | last }}">{{category[0] | split:"-" | last}}<span class="post-count-superscript">{{ category | last | size }}</span></a></li>
                 {% endif %}
               {% endfor %}
             </ul>
