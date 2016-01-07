@@ -59,7 +59,7 @@ a:active{
 	
 }
 
-@media screen and (orientation : landscape) { 
+@media screen and (orientation : landscape) and (max-width: 700px){ 
 
 	.bg{
 		height: 180px;
@@ -155,7 +155,8 @@ a:active{
 }
 
 .down.blog-nav>li{
-	padding-right: 2px;
+	padding-right: 0px;
+	padding-left:2px;
 	/*position: relative;*/
 }
 
