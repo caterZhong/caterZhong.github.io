@@ -11,8 +11,8 @@
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/home.css">
-  <link rel="canonical" href="http://yourdomain.com/2015/12/29/welcome-to-jekyll">
-  <link rel="alternate" type="application/rss+xml" title="Cater's blog" href="http://yourdomain.com/feed.xml">
+  <link rel="canonical" href="http://caterzhong.com/2015/12/29/welcome-to-jekyll">
+  <link rel="alternate" type="application/rss+xml" title="Cater's blog" href="http://caterzhong.com/feed.xml">
   
 
 </head>
@@ -55,6 +55,11 @@
                 
               
                 
+                
+              
+                
+                
+                    <li class="blog-cat"><a href="/blog/category/database" class="category-second nav" id="category-database">database<span class="post-count-superscript">1</span></a></li>
                 
               
             </ul>
@@ -133,7 +138,52 @@
     <a href="#top" class="scrollToTop">
       <i class="iconfont">&#xe603;</i>
     </a>  
+  
+    <div class="music-controller">
+      <div class="controller-wrap">
 
+        <!-- 歌曲信息 -->
+        <div class="song-info">
+          <div class="song-info-content">南山南－cater</div>
+          <div class="song-time">
+            <div class="player-position-time">00:00</div>
+            <div class="player-progress">
+              <span class="loading"></span>
+              <span class="playing"></span>
+              <span class="progress-dot"><i class="iconfont">&#xe608;</i></span>
+            </div>
+            <div class="total-time"></div>
+          </div>
+        </div>
+        <div class="player-control">
+          <a id="btn-pre" href="#" class="player-controll-btn">
+            <i class="iconfont">&#xe606;</i>
+          </a>
+          <a id="btn-play-pause" href="#" class="player-play-pause-Btn player-controll-btn">
+            <i class="iconfont icon-play">&#xe60b;</i>
+            <i class="iconfont icon-pause active">&#xe609;</i>
+          </a>          
+          <a id="btn-next" href="#" class="player-controll-btn">
+            <i class="iconfont">&#xe607;</i>
+          </a>
+          <a id="btn-module" href="#" class="player-controll-btn">
+            <i class="iconfont">&#xe611;</i>
+          </a>
+        </div>
+        <div class="player-volume">
+          <div class="horn-box">
+            <a href="#" class="horn">
+              <i class="iconfont">&#xe60a;</i>
+            </a>
+          </div>
+          <div class="volume-progress" id="volume-progress">
+              <span class="max"></span>
+              <span class="current"></span>
+              <span class="volume-dot"><i class="iconfont">&#xe608;</i></span>
+            </div>
+        </div>
+      </div>
+    </div>
     <div class="mask"></div>
     <!-- 回到顶部结束     -->
     <footer class="blog-footer">
@@ -143,7 +193,9 @@
 
   </body>
   <script src="/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+  <script src="/js/song.js" type="text/javascript"></script>
   <script src="/js/home.js" type="text/javascript"></script>
+
  
 </html>
 

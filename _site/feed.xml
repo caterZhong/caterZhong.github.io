@@ -4,11 +4,105 @@
     <title>Cater&#39;s blog</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 </description>
-    <link>http://yourdomain.com/</link>
-    <atom:link href="http://yourdomain.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 07 Jan 2016 15:08:25 +0800</pubDate>
-    <lastBuildDate>Thu, 07 Jan 2016 15:08:25 +0800</lastBuildDate>
+    <link>http://caterzhong.com/</link>
+    <atom:link href="http://caterzhong.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 31 Mar 2016 22:47:44 +0800</pubDate>
+    <lastBuildDate>Thu, 31 Mar 2016 22:47:44 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>MySQL学习笔记</title>
+        <description>&lt;p&gt;数据库作为数据的存储，在软件系统中占据着不可替代的作用，而数据存储的速度在某种程度上决定了数据交互的速率。本人多次使用MySQL数据库却一直没有去对它进行比较深入的了解，这段时间趁着有时间，把MySQL的知识学习了一下，希望以后能够写些高效一点的SQL语句。&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;一、基本操作&lt;/h1&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;检索不同的列&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select distinct vend_id from products;   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;section-2&quot;&gt;限制结果&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select distinct vend_id from products limit 5;    
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;limit 3,5 返回从行3开始的5行，第一个数为开始位置，第二个数为要检索的行数。默认一个数检索出来的第一行为行0而不是行1，因此limit 1,1将要检索出第二行而不是第一行。
+limit 4 offset 3，从行3开始的4行＝＝limit 3,4。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-3&quot;&gt;排序&lt;/h4&gt;
+&lt;p&gt;order by&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select prod_name from products order by prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;降序：desc 升序：asc
+关于位置：order by子句应该保证出现在from子句之后，如果使用where的时候，order by需要位于where 之后，如果使用limit，limit必须位于order by之后，否则将产生错误信息.&lt;/p&gt;
+
+&lt;h4 id=&quot;where&quot;&gt;where子句过滤信息&lt;/h4&gt;
+&lt;p&gt;空值检查：is null ／is not null&lt;/p&gt;
+
+&lt;p&gt;IN操作符：制定条件范围&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select prod_name,prod_price   
+from products
+where vend_id IN (1002,1003);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;NOT操作符：否定之后所跟的任何条件&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select prod_name,prod_price   
+from products   
+where vend_id NOT IN (1002,1003)   
+order by prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;section-4&quot;&gt;计算次序&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select prod_name,prod_price
+from products
+where vend_id = 1002 OR vend_id = 1003 And prod_price &amp;gt;= 10;   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;结果发现返回的结果中🈶出现小于10美元的数据。原因是SQL(像多数语言一样)在处理OR操作符前，优先处理AND操作符。上述SQL语句应该理解为供应商1003制造的任何价格为10美元或以上的产品，或者是由供应商1002制造的任何产品，而不管价格如何。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-5&quot;&gt;二、匹配搜索&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-6&quot;&gt;三、数据处理函数&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-7&quot;&gt;四、分组与汇总&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-8&quot;&gt;五、子查询&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-9&quot;&gt;六、联结与组合查询&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-10&quot;&gt;七、视图&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-11&quot;&gt;八、存储过程&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-12&quot;&gt;九、游标&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-13&quot;&gt;十、触发器&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-14&quot;&gt;十一、事务管理&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-15&quot;&gt;十二、性能优化&lt;/h1&gt;
+
+</description>
+        <pubDate>Tue, 15 Mar 2016 21:05:56 +0800</pubDate>
+        <link>http://caterzhong.com/2016/03/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0</link>
+        <guid isPermaLink="true">http://caterzhong.com/2016/03/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0</guid>
+        
+        <category>happy</category>
+        
+        
+        <category>study-database</category>
+        
+      </item>
     
       <item>
         <title>我也有自己的独立博客啦！</title>
@@ -18,8 +112,8 @@
 
 </description>
         <pubDate>Wed, 30 Dec 2015 21:05:56 +0800</pubDate>
-        <link>http://yourdomain.com/2015/12/30/%E6%88%91%E4%B9%9F%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2%E5%95%A6</link>
-        <guid isPermaLink="true">http://yourdomain.com/2015/12/30/%E6%88%91%E4%B9%9F%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2%E5%95%A6</guid>
+        <link>http://caterzhong.com/2015/12/30/%E6%88%91%E4%B9%9F%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2%E5%95%A6</link>
+        <guid isPermaLink="true">http://caterzhong.com/2015/12/30/%E6%88%91%E4%B9%9F%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2%E5%95%A6</guid>
         
         <category>happy</category>
         
@@ -46,8 +140,8 @@
 
 </description>
         <pubDate>Tue, 29 Dec 2015 16:05:56 +0800</pubDate>
-        <link>http://yourdomain.com/2015/12/29/welcome-to-jekyll</link>
-        <guid isPermaLink="true">http://yourdomain.com/2015/12/29/welcome-to-jekyll</guid>
+        <link>http://caterzhong.com/2015/12/29/welcome-to-jekyll</link>
+        <guid isPermaLink="true">http://caterzhong.com/2015/12/29/welcome-to-jekyll</guid>
         
         <category>jekyll</category>
         

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+
+  <title>MySQL学习笔记</title>
+  <meta name="description" content="数据库作为数据的存储，在软件系统中占据着不可替代的作用，而数据存储的速度在某种程度上决定了数据交互的速率。本人多次使用MySQL数据库却一直没有去对它进行比较深入的了解，这段时间趁着有时间，把MySQL的知识学习了一下，希望以后能够写些高效一点的SQL语句。">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="canonical" href="http://caterzhong.com/2016/03/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">
+  <link rel="alternate" type="application/rss+xml" title="Cater's blog" href="http://caterzhong.com/feed.xml">
+  
+
+</head>
+
+
+  <body>
+    <a name="top"></a>
+    <!-- 大背景 -->
+    <div class="bg">
+    &nbsp;
+    </div>
+    <!-- 大背景结束 -->
+    
+    <!-- 主内容区开始 -->
+    <div class="main-content">
+      <!-- 左边内容区开始 -->
+      <div class="content-left">
+        <div class="header-img">
+          <a href="#">
+            <img src="/images/moutain.png" alt="">
+          </a>
+        </div>
+        <h1 class="blogger-name">
+          <a href="/">cater</a>
+        </h1>
+        <p class="blogger-introduce">IT、爱情、运动、音乐、生活。。</p>
+        <a href="#" class="menu-btn"><i class="iconfont">&#xe602;</i></a>
+        <ul class="blog-nav">
+          <li>
+            <a href="/" id="first" class="category-first nav">首页</a>
+          </li>
+          <li>
+            <a href="#" id="study" class="category-first">学习</a>
+            <span class="arrow"></span>
+            <ul>
+              
+                
+                
+                    <li class="blog-cat"><a href="/blog/category/jekyll" class="category-second nav" id="category-jekyll">jekyll<span class="post-count-superscript">1</span></a></li>
+                
+              
+                
+                
+              
+                
+                
+                    <li class="blog-cat"><a href="/blog/category/database" class="category-second nav" id="category-database">database<span class="post-count-superscript">1</span></a></li>
+                
+              
+            </ul>
+          </li>
+          <li>
+            <a href="/blog/category/mood" id="mood" class="category-first nav">随心</a>
+          </li>
+          <li>
+            <a href="/music/music.html" id="music" class="category-first nav">音乐</a>
+          </li>
+          <li>
+            <a href="/about/about.html" id="about" class="category-first nav">关于</a>
+          </li>
+        </ul>
+      </div>
+      <!-- 左边内容区结束 -->
+      <!-- 右边内容区开始 -->
+      <div class="content-right">
+        <!-- <div class="location">学习>>jekyll</div> -->
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">MySQL学习笔记</h1>
+    <p class="post-meta"><time datetime="2016-03-15T21:05:56+08:00" itemprop="datePublished">Mar 15, 2016</time></p>
+  </header>
+
+  
+
+  <div class="post-content" itemprop="articleBody">
+    <p>数据库作为数据的存储，在软件系统中占据着不可替代的作用，而数据存储的速度在某种程度上决定了数据交互的速率。本人多次使用MySQL数据库却一直没有去对它进行比较深入的了解，这段时间趁着有时间，把MySQL的知识学习了一下，希望以后能够写些高效一点的SQL语句。<!-- more --></p>
+
+<h1 id="section">一、基本操作</h1>
+
+<h4 id="section-1">检索不同的列</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>select distinct vend_id from products;   
+</code></pre>
+</div>
+
+<h4 id="section-2">限制结果</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>select distinct vend_id from products limit 5;    
+</code></pre>
+</div>
+
+<p>limit 3,5 返回从行3开始的5行，第一个数为开始位置，第二个数为要检索的行数。默认一个数检索出来的第一行为行0而不是行1，因此limit 1,1将要检索出第二行而不是第一行。
+limit 4 offset 3，从行3开始的4行＝＝limit 3,4。</p>
+
+<h4 id="section-3">排序</h4>
+<p>order by</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>select prod_name from products order by prod_name;
+</code></pre>
+</div>
+
+<p>降序：desc 升序：asc
+关于位置：order by子句应该保证出现在from子句之后，如果使用where的时候，order by需要位于where 之后，如果使用limit，limit必须位于order by之后，否则将产生错误信息.</p>
+
+<h4 id="where">where子句过滤信息</h4>
+<p>空值检查：is null ／is not null</p>
+
+<p>IN操作符：制定条件范围</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>select prod_name,prod_price   
+from products
+where vend_id IN (1002,1003);
+</code></pre>
+</div>
+
+<p>NOT操作符：否定之后所跟的任何条件</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>select prod_name,prod_price   
+from products   
+where vend_id NOT IN (1002,1003)   
+order by prod_name;
+</code></pre>
+</div>
+
+<h4 id="section-4">计算次序</h4>
+<div class="highlighter-rouge"><pre class="highlight"><code>select prod_name,prod_price
+from products
+where vend_id = 1002 OR vend_id = 1003 And prod_price &gt;= 10;   
+</code></pre>
+</div>
+
+<p>结果发现返回的结果中🈶出现小于10美元的数据。原因是SQL(像多数语言一样)在处理OR操作符前，优先处理AND操作符。上述SQL语句应该理解为供应商1003制造的任何价格为10美元或以上的产品，或者是由供应商1002制造的任何产品，而不管价格如何。</p>
+
+<h1 id="section-5">二、匹配搜索</h1>
+
+<h1 id="section-6">三、数据处理函数</h1>
+
+<h1 id="section-7">四、分组与汇总</h1>
+
+<h1 id="section-8">五、子查询</h1>
+
+<h1 id="section-9">六、联结与组合查询</h1>
+
+<h1 id="section-10">七、视图</h1>
+
+<h1 id="section-11">八、存储过程</h1>
+
+<h1 id="section-12">九、游标</h1>
+
+<h1 id="section-13">十、触发器</h1>
+
+<h1 id="section-14">十一、事务管理</h1>
+
+<h1 id="section-15">十二、性能优化</h1>
+
+
+  </div>
+  <!-- <p id="post-meta">标签 <i class="fa fa-tag"></i>: <a href="/blog/tag/happy/">开心</a></p> -->
+  <div class="tag-box"><i class="iconfont">&#xe600;</i>标签 <i class="fa fa-tag"></i>: <a href="/blog/tag/happy/">开心</a></div>
+  
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="/2016/03/15/MySQL学习笔记" data-title="MySQL学习笔记" data-url="/2016/03/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"cater"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+ 
+
+
+</article>
+
+      </div>
+      <!-- 右边内容区结束 -->
+    </div>
+    <!-- 主内容区结束 -->
+
+    <!-- 回到顶部开始 -->
+    <a href="#top" class="scrollToTop">
+      <i class="iconfont">&#xe603;</i>
+    </a>  
+  
+    <div class="music-controller">
+      <div class="controller-wrap">
+
+        <!-- 歌曲信息 -->
+        <div class="song-info">
+          <div class="song-info-content">南山南－cater</div>
+          <div class="song-time">
+            <div class="player-position-time">00:00</div>
+            <div class="player-progress">
+              <span class="loading"></span>
+              <span class="playing"></span>
+              <span class="progress-dot"><i class="iconfont">&#xe608;</i></span>
+            </div>
+            <div class="total-time"></div>
+          </div>
+        </div>
+        <div class="player-control">
+          <a id="btn-pre" href="#" class="player-controll-btn">
+            <i class="iconfont">&#xe606;</i>
+          </a>
+          <a id="btn-play-pause" href="#" class="player-play-pause-Btn player-controll-btn">
+            <i class="iconfont icon-play">&#xe60b;</i>
+            <i class="iconfont icon-pause active">&#xe609;</i>
+          </a>          
+          <a id="btn-next" href="#" class="player-controll-btn">
+            <i class="iconfont">&#xe607;</i>
+          </a>
+          <a id="btn-module" href="#" class="player-controll-btn">
+            <i class="iconfont">&#xe611;</i>
+          </a>
+        </div>
+        <div class="player-volume">
+          <div class="horn-box">
+            <a href="#" class="horn">
+              <i class="iconfont">&#xe60a;</i>
+            </a>
+          </div>
+          <div class="volume-progress" id="volume-progress">
+              <span class="max"></span>
+              <span class="current"></span>
+              <span class="volume-dot"><i class="iconfont">&#xe608;</i></span>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="mask"></div>
+    <!-- 回到顶部结束     -->
+    <footer class="blog-footer">
+  Made By Cater @ 2015 
+</footer>
+
+
+  </body>
+  <script src="/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+  <script src="/js/song.js" type="text/javascript"></script>
+  <script src="/js/home.js" type="text/javascript"></script>
+
+ 
+</html>
+
