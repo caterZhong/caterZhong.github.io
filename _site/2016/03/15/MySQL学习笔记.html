@@ -118,7 +118,7 @@ limit 4 offset 3，从行3开始的4行＝＝limit 3,4。</p>
 关于位置：order by子句应该保证出现在from子句之后，如果使用where的时候，order by需要位于where 之后，如果使用limit，limit必须位于order by之后，否则将产生错误信息.</p>
 
 <h4 id="where"><strong>where子句过滤信息</strong></h4>
-<p>空值检查：is null ／is not null</p>
+<p>空值检查：is null/is not null</p>
 
 <p>IN操作符：制定条件范围</p>
 
@@ -172,7 +172,7 @@ where prod_name Like '%anvil%';
   </li>
 </ul>
 
-<h4 id="section-5"><strong>_操作符</strong></h4>
+<h4 id="section-5"><strong>下划线(_)操作符</strong></h4>
 <p>下划线的用途和%类似，但下划线只能匹配单个字符，不能多也不能少，而不是任意个字符。</p>
 
 <h4 id="section-6"><strong>使用通配符的技巧</strong></h4>
@@ -382,10 +382,255 @@ order by prod_name;
 </table>
 
 <h1 id="section-7">三、数据处理函数</h1>
+<p>函数没有SQL的可移植性强，能使用其他方式实现最好不使用函数，使用函数的使用，应该保证做好代码注释。  <br />
+<strong>文本处理函数</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Left(str,length)</td>
+      <td>返回串左边的字符</td>
+    </tr>
+    <tr>
+      <td>Length()</td>
+      <td>返回串的长度</td>
+    </tr>
+    <tr>
+      <td>Locate(substr,str,pos)</td>
+      <td>找出串的一个子串a在b中的位置，不存在返回0，第一个位置为1</td>
+    </tr>
+    <tr>
+      <td>Lower()</td>
+      <td>将串转换为小写</td>
+    </tr>
+    <tr>
+      <td>LTrim()</td>
+      <td>去掉串左边的空格</td>
+    </tr>
+    <tr>
+      <td>Right(str,length)</td>
+      <td>返回串右边的字符</td>
+    </tr>
+    <tr>
+      <td>RTrim()</td>
+      <td>去掉串右边的空格</td>
+    </tr>
+    <tr>
+      <td>Soundex()</td>
+      <td>返回串的SOUNDEX值</td>
+    </tr>
+    <tr>
+      <td>SubString(str,pos,length)</td>
+      <td>返回子串的字符,length可以省略</td>
+    </tr>
+    <tr>
+      <td>Upper()</td>
+      <td>将串转换为大写</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>soundex()的使用例子： 可以搜到鱼Y Lie同音的Y Lee</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>select cust_name,cust_contact
+from customers
+where Soundex(cust_contact) = Soundex('Y Lie');
+</code></pre>
+</div>
+
+<p><strong>日期和时间处理函数</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AddDate()</td>
+      <td>增加一个日期(天,周等)</td>
+    </tr>
+    <tr>
+      <td>AddTime()</td>
+      <td>增加一个时间(时,分等)</td>
+    </tr>
+    <tr>
+      <td>CurDate()</td>
+      <td>返回当前日期</td>
+    </tr>
+    <tr>
+      <td>CurTime()</td>
+      <td>返回当前时间</td>
+    </tr>
+    <tr>
+      <td>Date()</td>
+      <td>返回日期时间的日期部分</td>
+    </tr>
+    <tr>
+      <td>DateDiff()</td>
+      <td>计算两个日期之差</td>
+    </tr>
+    <tr>
+      <td>Date_Add(date,INTERVAL expr type)</td>
+      <td>高度灵活的日期运算函数</td>
+    </tr>
+    <tr>
+      <td>Date_Format(date,format)</td>
+      <td>返回一个格式化的日期或时间串</td>
+    </tr>
+    <tr>
+      <td>Day()</td>
+      <td>返回一个日期的天数部分</td>
+    </tr>
+    <tr>
+      <td>DayOfWeek()</td>
+      <td>对于一个日期，返回对应的星期几,1=星期天</td>
+    </tr>
+    <tr>
+      <td>Hour()</td>
+      <td>返回一个时间的小时部分</td>
+    </tr>
+    <tr>
+      <td>Minute()</td>
+      <td>返回一个时间的分钟部分</td>
+    </tr>
+    <tr>
+      <td>Month()</td>
+      <td>返回一个日期的月份部分</td>
+    </tr>
+    <tr>
+      <td>Now()</td>
+      <td>返回当前的时间日期</td>
+    </tr>
+    <tr>
+      <td>Second()</td>
+      <td>返回时间的秒部分</td>
+    </tr>
+    <tr>
+      <td>Time()</td>
+      <td>返回一个日期的时间部分</td>
+    </tr>
+    <tr>
+      <td>Year()</td>
+      <td>返回一个日期的年份部分</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>注意：</strong> <br />
+日期date的数据类型如果为datetime，这时候如果存储的值为2016-03－15 16:30:05则<code class="highlighter-rouge">where order_date ='2016-03-15'</code>会出现检索失败。可以使用日期函数，或者使用范围替代。</p>
+
+<p><strong>数值处理函数</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函数</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Abs()</td>
+      <td>返回一个数的绝对值</td>
+    </tr>
+    <tr>
+      <td>Floor(x)</td>
+      <td>返回小于或等于x的最大整数</td>
+    </tr>
+    <tr>
+      <td>Ceil(x)</td>
+      <td>返回大雨或等于x的最小整数</td>
+    </tr>
+    <tr>
+      <td>Round(x)</td>
+      <td>返回离x最近的整数</td>
+    </tr>
+    <tr>
+      <td>Round(x,y)</td>
+      <td>保留x小数点后y位的值，但截断时要进行四舍五入</td>
+    </tr>
+    <tr>
+      <td>Cos()</td>
+      <td>返回一个角度的余弦</td>
+    </tr>
+    <tr>
+      <td>Exp(x)</td>
+      <td>返回e的x次方</td>
+    </tr>
+    <tr>
+      <td>Pow(x,y)</td>
+      <td>返回x的y次方,y可以为负数</td>
+    </tr>
+    <tr>
+      <td>Mod(x,y)</td>
+      <td>返回x除以y后的余数</td>
+    </tr>
+    <tr>
+      <td>Pi()</td>
+      <td>返回圆周率</td>
+    </tr>
+    <tr>
+      <td>Rand()</td>
+      <td>返回一个随机数</td>
+    </tr>
+    <tr>
+      <td>Sin()</td>
+      <td>返回一个角度的正弦</td>
+    </tr>
+    <tr>
+      <td>Sqrt()</td>
+      <td>返回一个数的平方根</td>
+    </tr>
+    <tr>
+      <td>Tan()</td>
+      <td>返回一个角度的正切</td>
+    </tr>
+  </tbody>
+</table>
 
 <h1 id="section-8">四、分组与汇总</h1>
+<p><strong>聚集函数</strong> <br />
+Avg()、Count()、Max()、Min()、Sum()  <br />
+Avg()只能用来确定特定数值列的平均值，直接忽略NULL值的行 <br />
+其他几个函数也忽略NULL值 <br />
+<strong>注意:</strong> <br />
+ALL为默认的行为，如果只包含不同的值使用DISTINCT参数<code class="highlighter-rouge">Avg(DISTINCT price)</code>，不能使用Count(DISTINCT).</p>
+
+<p><strong>分组</strong> <br />
+	select vend_id,count(*) as num_prods
+	from products
+	group by vend_id; <br />
+<strong>注意</strong></p>
+
+<ul>
+  <li>如果分组中有NULL值，则NULL将作为一个分组返回。</li>
+  <li>Group By子句必须出现在Where子句之后，Order By子句之前。</li>
+  <li>Group By只能使用选择列或表达式列，而且必须使用每个选择列表达式。</li>
+  <li>
+    <p>过滤子句使用Having，而不用where，where过滤基于特定行，having基于分组。</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>select vend_id,Count(*) as num_prods
+from products
+where prod_price &gt;= 10
+group by vend_id
+having count(*) &gt;= 2;   
+</code></pre>
+    </div>
+  </li>
+</ul>
 
 <h1 id="section-9">五、子查询</h1>
+
+<p><strong>待续。。。</strong></p>
 
 <h1 id="section-10">六、联结与组合查询</h1>
 
@@ -403,8 +648,8 @@ order by prod_name;
 
 
   </div>
-  <!-- <p id="post-meta">标签 <i class="fa fa-tag"></i>: <a href="/blog/tag/happy/">开心</a></p> -->
-  <div class="tag-box"><i class="iconfont">&#xe600;</i>标签 <i class="fa fa-tag"></i>: <a href="/blog/tag/happy/">开心</a></div>
+  <!-- <p id="post-meta"></p> -->
+  <div class="tag-box"><i class="iconfont">&#xe600;</i></div>
   
   <!-- 多说评论框 start -->
   <div class="ds-thread" data-thread-key="/2016/03/15/MySQL学习笔记" data-title="MySQL学习笔记" data-url="/2016/03/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"></div>
@@ -436,7 +681,10 @@ order by prod_name;
     <a href="#top" class="scrollToTop">
       <i class="iconfont">&#xe603;</i>
     </a>  
-  
+    
+    <div class="music-player">
+      <video id="music_video" controls="controls" src="" style="width: 0px; height: 0px;"></video>
+    </div>
     <div class="music-controller">
       <div class="controller-wrap">
 

@@ -14,7 +14,7 @@ $(function(){
 		case "study": $("#study").addClass("nav-active");break;
 		case "mood": $("#mood").addClass("nav-active");break;
 		case "sports": $("#sports").addClass("nav-active");break;
-		case "music": $("#music").addClass("nav-active");break;
+		case "music": $("#music").addClass("nav-active");$(".music-controller").show();video.play();break;
 		case "about": $("#about").addClass("nav-active");break;
 		default:$("#first").addClass("nav-active");break;
 	}

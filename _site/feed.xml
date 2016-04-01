@@ -6,8 +6,8 @@
 </description>
     <link>http://caterzhong.com/</link>
     <atom:link href="http://caterzhong.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 01 Apr 2016 11:51:28 +0800</pubDate>
-    <lastBuildDate>Fri, 01 Apr 2016 11:51:28 +0800</lastBuildDate>
+    <pubDate>Fri, 01 Apr 2016 20:47:32 +0800</pubDate>
+    <lastBuildDate>Fri, 01 Apr 2016 20:47:32 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -41,7 +41,7 @@ limit 4 offset 3，从行3开始的4行＝＝limit 3,4。&lt;/p&gt;
 关于位置：order by子句应该保证出现在from子句之后，如果使用where的时候，order by需要位于where 之后，如果使用limit，limit必须位于order by之后，否则将产生错误信息.&lt;/p&gt;
 
 &lt;h4 id=&quot;where&quot;&gt;&lt;strong&gt;where子句过滤信息&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;空值检查：is null ／is not null&lt;/p&gt;
+&lt;p&gt;空值检查：is null/is not null&lt;/p&gt;
 
 &lt;p&gt;IN操作符：制定条件范围&lt;/p&gt;
 
@@ -95,7 +95,7 @@ where prod_name Like &#39;%anvil%&#39;;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;section-5&quot;&gt;&lt;strong&gt;_操作符&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;section-5&quot;&gt;&lt;strong&gt;下划线(_)操作符&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;下划线的用途和%类似，但下划线只能匹配单个字符，不能多也不能少，而不是任意个字符。&lt;/p&gt;
 
 &lt;h4 id=&quot;section-6&quot;&gt;&lt;strong&gt;使用通配符的技巧&lt;/strong&gt;&lt;/h4&gt;
@@ -305,10 +305,255 @@ order by prod_name;
 &lt;/table&gt;
 
 &lt;h1 id=&quot;section-7&quot;&gt;三、数据处理函数&lt;/h1&gt;
+&lt;p&gt;函数没有SQL的可移植性强，能使用其他方式实现最好不使用函数，使用函数的使用，应该保证做好代码注释。  &lt;br /&gt;
+&lt;strong&gt;文本处理函数&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;函数&lt;/th&gt;
+      &lt;th&gt;说明&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Left(str,length)&lt;/td&gt;
+      &lt;td&gt;返回串左边的字符&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Length()&lt;/td&gt;
+      &lt;td&gt;返回串的长度&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Locate(substr,str,pos)&lt;/td&gt;
+      &lt;td&gt;找出串的一个子串a在b中的位置，不存在返回0，第一个位置为1&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Lower()&lt;/td&gt;
+      &lt;td&gt;将串转换为小写&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LTrim()&lt;/td&gt;
+      &lt;td&gt;去掉串左边的空格&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Right(str,length)&lt;/td&gt;
+      &lt;td&gt;返回串右边的字符&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;RTrim()&lt;/td&gt;
+      &lt;td&gt;去掉串右边的空格&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Soundex()&lt;/td&gt;
+      &lt;td&gt;返回串的SOUNDEX值&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SubString(str,pos,length)&lt;/td&gt;
+      &lt;td&gt;返回子串的字符,length可以省略&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Upper()&lt;/td&gt;
+      &lt;td&gt;将串转换为大写&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;soundex()的使用例子： 可以搜到鱼Y Lie同音的Y Lee&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select cust_name,cust_contact
+from customers
+where Soundex(cust_contact) = Soundex(&#39;Y Lie&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;日期和时间处理函数&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;函数&lt;/th&gt;
+      &lt;th&gt;说明&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;AddDate()&lt;/td&gt;
+      &lt;td&gt;增加一个日期(天,周等)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;AddTime()&lt;/td&gt;
+      &lt;td&gt;增加一个时间(时,分等)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CurDate()&lt;/td&gt;
+      &lt;td&gt;返回当前日期&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CurTime()&lt;/td&gt;
+      &lt;td&gt;返回当前时间&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Date()&lt;/td&gt;
+      &lt;td&gt;返回日期时间的日期部分&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DateDiff()&lt;/td&gt;
+      &lt;td&gt;计算两个日期之差&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Date_Add(date,INTERVAL expr type)&lt;/td&gt;
+      &lt;td&gt;高度灵活的日期运算函数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Date_Format(date,format)&lt;/td&gt;
+      &lt;td&gt;返回一个格式化的日期或时间串&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Day()&lt;/td&gt;
+      &lt;td&gt;返回一个日期的天数部分&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DayOfWeek()&lt;/td&gt;
+      &lt;td&gt;对于一个日期，返回对应的星期几,1=星期天&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Hour()&lt;/td&gt;
+      &lt;td&gt;返回一个时间的小时部分&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Minute()&lt;/td&gt;
+      &lt;td&gt;返回一个时间的分钟部分&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Month()&lt;/td&gt;
+      &lt;td&gt;返回一个日期的月份部分&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Now()&lt;/td&gt;
+      &lt;td&gt;返回当前的时间日期&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Second()&lt;/td&gt;
+      &lt;td&gt;返回时间的秒部分&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Time()&lt;/td&gt;
+      &lt;td&gt;返回一个日期的时间部分&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Year()&lt;/td&gt;
+      &lt;td&gt;返回一个日期的年份部分&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt; &lt;br /&gt;
+日期date的数据类型如果为datetime，这时候如果存储的值为2016-03－15 16:30:05则&lt;code class=&quot;highlighter-rouge&quot;&gt;where order_date =&#39;2016-03-15&#39;&lt;/code&gt;会出现检索失败。可以使用日期函数，或者使用范围替代。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;数值处理函数&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;函数&lt;/th&gt;
+      &lt;th&gt;说明&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Abs()&lt;/td&gt;
+      &lt;td&gt;返回一个数的绝对值&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Floor(x)&lt;/td&gt;
+      &lt;td&gt;返回小于或等于x的最大整数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Ceil(x)&lt;/td&gt;
+      &lt;td&gt;返回大雨或等于x的最小整数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Round(x)&lt;/td&gt;
+      &lt;td&gt;返回离x最近的整数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Round(x,y)&lt;/td&gt;
+      &lt;td&gt;保留x小数点后y位的值，但截断时要进行四舍五入&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Cos()&lt;/td&gt;
+      &lt;td&gt;返回一个角度的余弦&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Exp(x)&lt;/td&gt;
+      &lt;td&gt;返回e的x次方&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Pow(x,y)&lt;/td&gt;
+      &lt;td&gt;返回x的y次方,y可以为负数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Mod(x,y)&lt;/td&gt;
+      &lt;td&gt;返回x除以y后的余数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Pi()&lt;/td&gt;
+      &lt;td&gt;返回圆周率&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Rand()&lt;/td&gt;
+      &lt;td&gt;返回一个随机数&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Sin()&lt;/td&gt;
+      &lt;td&gt;返回一个角度的正弦&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Sqrt()&lt;/td&gt;
+      &lt;td&gt;返回一个数的平方根&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Tan()&lt;/td&gt;
+      &lt;td&gt;返回一个角度的正切&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;h1 id=&quot;section-8&quot;&gt;四、分组与汇总&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;聚集函数&lt;/strong&gt; &lt;br /&gt;
+Avg()、Count()、Max()、Min()、Sum()  &lt;br /&gt;
+Avg()只能用来确定特定数值列的平均值，直接忽略NULL值的行 &lt;br /&gt;
+其他几个函数也忽略NULL值 &lt;br /&gt;
+&lt;strong&gt;注意:&lt;/strong&gt; &lt;br /&gt;
+ALL为默认的行为，如果只包含不同的值使用DISTINCT参数&lt;code class=&quot;highlighter-rouge&quot;&gt;Avg(DISTINCT price)&lt;/code&gt;，不能使用Count(DISTINCT).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;分组&lt;/strong&gt; &lt;br /&gt;
+	select vend_id,count(*) as num_prods
+	from products
+	group by vend_id; &lt;br /&gt;
+&lt;strong&gt;注意&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如果分组中有NULL值，则NULL将作为一个分组返回。&lt;/li&gt;
+  &lt;li&gt;Group By子句必须出现在Where子句之后，Order By子句之前。&lt;/li&gt;
+  &lt;li&gt;Group By只能使用选择列或表达式列，而且必须使用每个选择列表达式。&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;过滤子句使用Having，而不用where，where过滤基于特定行，having基于分组。&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select vend_id,Count(*) as num_prods
+from products
+where prod_price &amp;gt;= 10
+group by vend_id
+having count(*) &amp;gt;= 2;   
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h1 id=&quot;section-9&quot;&gt;五、子查询&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;待续。。。&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;section-10&quot;&gt;六、联结与组合查询&lt;/h1&gt;
 
@@ -328,8 +573,6 @@ order by prod_name;
         <pubDate>Tue, 15 Mar 2016 21:05:56 +0800</pubDate>
         <link>http://caterzhong.com/2016/03/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0</link>
         <guid isPermaLink="true">http://caterzhong.com/2016/03/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0</guid>
-        
-        <category>happy</category>
         
         
         <category>study-database</category>
