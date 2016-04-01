@@ -39,13 +39,15 @@ body{
 }
 
 h1{
-	font-size: 2rem;
+	font-size: 1.8rem;
 	color:#444;
 }
 
 h2{
 	font-size:1.6rem;
 }
+
+
 
 a:hover{
 	text-decoration: none;
@@ -217,10 +219,35 @@ a.category-active{
 	font-size: 14px;
 	color:#666;
 }
+	
+	.post-content h1{
+		padding:1.5rem 0 0 0;
+	}
 
 	.post-content h4{
-		font-size:1.3rem;
-		color:#111;
+		font-size:1.1rem;
+		color:#333;
+		margin-top:1.5rem;
+	}
+	
+	.post-content p{
+		margin-bottom:0.3rem;
+	}
+
+	.post-content table{
+		/*border-width: 1px;
+		border-style:solid;
+*/		width: 100%;
+		text-align: center;
+		border:1px solid #ddd;
+		border-collapse: collapse;
+		font-size: 0.5rem;
+		margin-bottom: 0.8rem;
+	}
+
+	.post-content table th,.post-content table td{
+		border: 1px solid #ddd;
+		padding:3px 5px;
 	}
 
 .post-meta{

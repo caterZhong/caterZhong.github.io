@@ -6,8 +6,8 @@
 </description>
     <link>http://caterzhong.com/</link>
     <atom:link href="http://caterzhong.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 31 Mar 2016 22:47:44 +0800</pubDate>
-    <lastBuildDate>Thu, 31 Mar 2016 22:47:44 +0800</lastBuildDate>
+    <pubDate>Fri, 01 Apr 2016 11:30:12 +0800</pubDate>
+    <lastBuildDate>Fri, 01 Apr 2016 11:30:12 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -16,13 +16,13 @@
 
 &lt;h1 id=&quot;section&quot;&gt;一、基本操作&lt;/h1&gt;
 
-&lt;h4 id=&quot;section-1&quot;&gt;检索不同的列&lt;/h4&gt;
+&lt;h4 id=&quot;section-1&quot;&gt;&lt;strong&gt;检索不同的列&lt;/strong&gt;&lt;/h4&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select distinct vend_id from products;   
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select distinct vend_id from products;     
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h4 id=&quot;section-2&quot;&gt;限制结果&lt;/h4&gt;
+&lt;h4 id=&quot;section-2&quot;&gt;&lt;strong&gt;限制结果&lt;/strong&gt;&lt;/h4&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select distinct vend_id from products limit 5;    
 &lt;/code&gt;&lt;/pre&gt;
@@ -31,8 +31,7 @@
 &lt;p&gt;limit 3,5 返回从行3开始的5行，第一个数为开始位置，第二个数为要检索的行数。默认一个数检索出来的第一行为行0而不是行1，因此limit 1,1将要检索出第二行而不是第一行。
 limit 4 offset 3，从行3开始的4行＝＝limit 3,4。&lt;/p&gt;
 
-&lt;h4 id=&quot;section-3&quot;&gt;排序&lt;/h4&gt;
-&lt;p&gt;order by&lt;/p&gt;
+&lt;h4 id=&quot;order-by&quot;&gt;&lt;strong&gt;排序(order by)&lt;/strong&gt;&lt;/h4&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select prod_name from products order by prod_name;
 &lt;/code&gt;&lt;/pre&gt;
@@ -41,7 +40,7 @@ limit 4 offset 3，从行3开始的4行＝＝limit 3,4。&lt;/p&gt;
 &lt;p&gt;降序：desc 升序：asc
 关于位置：order by子句应该保证出现在from子句之后，如果使用where的时候，order by需要位于where 之后，如果使用limit，limit必须位于order by之后，否则将产生错误信息.&lt;/p&gt;
 
-&lt;h4 id=&quot;where&quot;&gt;where子句过滤信息&lt;/h4&gt;
+&lt;h4 id=&quot;where&quot;&gt;&lt;strong&gt;where子句过滤信息&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;空值检查：is null ／is not null&lt;/p&gt;
 
 &lt;p&gt;IN操作符：制定条件范围&lt;/p&gt;
@@ -61,7 +60,7 @@ order by prod_name;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h4 id=&quot;section-4&quot;&gt;计算次序&lt;/h4&gt;
+&lt;h4 id=&quot;section-3&quot;&gt;&lt;strong&gt;计算次序&lt;/strong&gt;&lt;/h4&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select prod_name,prod_price
 from products
 where vend_id = 1002 OR vend_id = 1003 And prod_price &amp;gt;= 10;   
@@ -70,27 +69,260 @@ where vend_id = 1002 OR vend_id = 1003 And prod_price &amp;gt;= 10;
 
 &lt;p&gt;结果发现返回的结果中🈶出现小于10美元的数据。原因是SQL(像多数语言一样)在处理OR操作符前，优先处理AND操作符。上述SQL语句应该理解为供应商1003制造的任何价格为10美元或以上的产品，或者是由供应商1002制造的任何产品，而不管价格如何。&lt;/p&gt;
 
-&lt;h1 id=&quot;section-5&quot;&gt;二、匹配搜索&lt;/h1&gt;
+&lt;h1 id=&quot;section-4&quot;&gt;二、匹配搜索&lt;/h1&gt;
 
-&lt;h1 id=&quot;section-6&quot;&gt;三、数据处理函数&lt;/h1&gt;
+&lt;h4 id=&quot;like&quot;&gt;&lt;strong&gt;Like操作符&lt;/strong&gt;&lt;/h4&gt;
 
-&lt;h1 id=&quot;section-7&quot;&gt;四、分组与汇总&lt;/h1&gt;
+&lt;p&gt;由字面值、通配符或两者组合构成搜索条件。&lt;/p&gt;
 
-&lt;h1 id=&quot;section-8&quot;&gt;五、子查询&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select prod_id,prod_name
+from products
+where prod_name Like &#39;%anvil%&#39;;   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;h1 id=&quot;section-9&quot;&gt;六、联结与组合查询&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;section-10&quot;&gt;七、视图&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;搜索区分大小写&lt;/li&gt;
+  &lt;li&gt;注意去掉为空格，否则会出现匹配不正确&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;%可以匹配任何东西，但NULL除外&lt;/p&gt;
 
-&lt;h1 id=&quot;section-11&quot;&gt;八、存储过程&lt;/h1&gt;
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;where prod_name like ‘%’;   //不能匹配值为NULL的长产品行。
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h1 id=&quot;section-12&quot;&gt;九、游标&lt;/h1&gt;
+&lt;h4 id=&quot;section-5&quot;&gt;&lt;strong&gt;_操作符&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;下划线的用途和%类似，但下划线只能匹配单个字符，不能多也不能少，而不是任意个字符。&lt;/p&gt;
 
-&lt;h1 id=&quot;section-13&quot;&gt;十、触发器&lt;/h1&gt;
+&lt;h4 id=&quot;section-6&quot;&gt;&lt;strong&gt;使用通配符的技巧&lt;/strong&gt;&lt;/h4&gt;
 
-&lt;h1 id=&quot;section-14&quot;&gt;十一、事务管理&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;不要过度使用通配符。如果其他操作符能达到相同的目的，应该使用其他操作符。&lt;/li&gt;
+  &lt;li&gt;在确定需要使用通配符时，除非绝对有必要，否则不要把它们用在搜索模式的开始处。把通配符置于搜索模式的开始处，搜索起来是最慢的。&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h1 id=&quot;section-15&quot;&gt;十二、性能优化&lt;/h1&gt;
+&lt;h4 id=&quot;regexp&quot;&gt;&lt;strong&gt;正则表达式REGEXP匹配&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;以下例子检索列包含prod_name包含文本1000的所有行。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select prod_name
+from products
+where prod_name REGEXP &#39;1000&#39;
+order by prod_name;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;’.’匹配任意一个字符&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;匹配不区分大小写,为了区分大小写，可以使用BINARY关键字&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;where prod_name REGEXP BINARY &#39;JetPack .000&#39;;  
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;OR匹配&lt;/strong&gt;&lt;br /&gt;
+	‘|’相当于OR条件，例如：‘1000｜2000｜3000’ &lt;br /&gt;
+&lt;strong&gt;匹配几个字符之一&lt;/strong&gt; &lt;br /&gt;
+使用’[ ]’匹配几个字符之一，［123］为［1｜2｜3］的缩写。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;匹配范围&lt;/strong&gt; &lt;br /&gt;
+使用［0-9］代替［0123456789］，［a-z］任意字母字符&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;匹配特殊字符&lt;/strong&gt; &lt;br /&gt;
+需要匹配’.’等特殊字符的时候需要使用’\.’进行匹配。包括’.’、’|’、’[‘、’]’、’&#39;都需要同样处理。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;元字符&lt;/th&gt;
+      &lt;th&gt;说明&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\\f&lt;/td&gt;
+      &lt;td&gt;换页&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\\n&lt;/td&gt;
+      &lt;td&gt;换行&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\\r&lt;/td&gt;
+      &lt;td&gt;回车&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\\t&lt;/td&gt;
+      &lt;td&gt;制表&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;\\v&lt;/td&gt;
+      &lt;td&gt;纵向制表&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;匹配字符类&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;类&lt;/th&gt;
+      &lt;th&gt;说明&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[:alnum:]&lt;/td&gt;
+      &lt;td&gt;任意字母和数字（同[a-zA-Z0-9]）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[:alpha:]&lt;/td&gt;
+      &lt;td&gt;任意字符（同[a-zA-Z]）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[:blank:]&lt;/td&gt;
+      &lt;td&gt;空格和制表符同（[\\t]）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[:cntrl:]&lt;/td&gt;
+      &lt;td&gt;ASCII控制字符（ASCII0到31和127）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[:digit:]&lt;/td&gt;
+      &lt;td&gt;任意数字（同[0-9]）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[:graph:]&lt;/td&gt;
+      &lt;td&gt;与[:print:]相同，但不包括空格）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[:lower:]&lt;/td&gt;
+      &lt;td&gt;任意消小写字母（同[a-z]）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[:print:]&lt;/td&gt;
+      &lt;td&gt;任意可打印字符&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[:punct:]&lt;/td&gt;
+      &lt;td&gt;既不在[:alnum:]又不在[:cntrl:]中的任意字符&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[:space:]&lt;/td&gt;
+      &lt;td&gt;包括空格在内的任意空白字符（同[\\f\\n\\r\\t\\v]）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[:upper:]&lt;/td&gt;
+      &lt;td&gt;任意大写字母（同[A-Z]）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[:xdigit:]&lt;/td&gt;
+      &lt;td&gt;任意十六进制数字（同[a-fA－F0-9]）&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;定位符&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;元字符&lt;/th&gt;
+      &lt;th&gt;说明&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;^&lt;/td&gt;
+      &lt;td&gt;文本的开始&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;$&lt;/td&gt;
+      &lt;td&gt;文本的结尾&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[ [:&amp;lt;:] ]&lt;/td&gt;
+      &lt;td&gt;词的开始&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[ [:&amp;gt;:] ]&lt;/td&gt;
+      &lt;td&gt;词的结尾&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;^的双重用途，在集合中[ ] ,用来否定该集合，否则，用来指串的开始。&lt;/li&gt;
+  &lt;li&gt;REGEXP总是返回0（没有匹配）或者1（匹配）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;匹配多个实例&lt;/strong&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;元字符&lt;/th&gt;
+      &lt;th&gt;说明&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;*&lt;/td&gt;
+      &lt;td&gt;0个或多个匹配&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;+&lt;/td&gt;
+      &lt;td&gt;1个或多个匹配（等于{1,}）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;?&lt;/td&gt;
+      &lt;td&gt;0个或1个匹配（等于{0,1}）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;{n}&lt;/td&gt;
+      &lt;td&gt;指定数目的匹配&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;{n,}&lt;/td&gt;
+      &lt;td&gt;不少于指定数目的匹配&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;{n,m}&lt;/td&gt;
+      &lt;td&gt;匹配数目的范围（m不超过255）&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&quot;section-7&quot;&gt;三、数据处理函数&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-8&quot;&gt;四、分组与汇总&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-9&quot;&gt;五、子查询&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-10&quot;&gt;六、联结与组合查询&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-11&quot;&gt;七、视图&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-12&quot;&gt;八、存储过程&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-13&quot;&gt;九、游标&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-14&quot;&gt;十、触发器&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-15&quot;&gt;十一、事务管理&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-16&quot;&gt;十二、性能优化&lt;/h1&gt;
 
 </description>
         <pubDate>Tue, 15 Mar 2016 21:05:56 +0800</pubDate>

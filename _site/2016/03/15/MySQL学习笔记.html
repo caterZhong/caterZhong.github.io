@@ -93,13 +93,13 @@
 
 <h1 id="section">一、基本操作</h1>
 
-<h4 id="section-1">检索不同的列</h4>
+<h4 id="section-1"><strong>检索不同的列</strong></h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>select distinct vend_id from products;   
+<div class="highlighter-rouge"><pre class="highlight"><code>select distinct vend_id from products;     
 </code></pre>
 </div>
 
-<h4 id="section-2">限制结果</h4>
+<h4 id="section-2"><strong>限制结果</strong></h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>select distinct vend_id from products limit 5;    
 </code></pre>
@@ -108,8 +108,7 @@
 <p>limit 3,5 返回从行3开始的5行，第一个数为开始位置，第二个数为要检索的行数。默认一个数检索出来的第一行为行0而不是行1，因此limit 1,1将要检索出第二行而不是第一行。
 limit 4 offset 3，从行3开始的4行＝＝limit 3,4。</p>
 
-<h4 id="section-3">排序</h4>
-<p>order by</p>
+<h4 id="order-by"><strong>排序(order by)</strong></h4>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>select prod_name from products order by prod_name;
 </code></pre>
@@ -118,7 +117,7 @@ limit 4 offset 3，从行3开始的4行＝＝limit 3,4。</p>
 <p>降序：desc 升序：asc
 关于位置：order by子句应该保证出现在from子句之后，如果使用where的时候，order by需要位于where 之后，如果使用limit，limit必须位于order by之后，否则将产生错误信息.</p>
 
-<h4 id="where">where子句过滤信息</h4>
+<h4 id="where"><strong>where子句过滤信息</strong></h4>
 <p>空值检查：is null ／is not null</p>
 
 <p>IN操作符：制定条件范围</p>
@@ -138,7 +137,7 @@ order by prod_name;
 </code></pre>
 </div>
 
-<h4 id="section-4">计算次序</h4>
+<h4 id="section-3"><strong>计算次序</strong></h4>
 <div class="highlighter-rouge"><pre class="highlight"><code>select prod_name,prod_price
 from products
 where vend_id = 1002 OR vend_id = 1003 And prod_price &gt;= 10;   
@@ -147,27 +146,260 @@ where vend_id = 1002 OR vend_id = 1003 And prod_price &gt;= 10;
 
 <p>结果发现返回的结果中🈶出现小于10美元的数据。原因是SQL(像多数语言一样)在处理OR操作符前，优先处理AND操作符。上述SQL语句应该理解为供应商1003制造的任何价格为10美元或以上的产品，或者是由供应商1002制造的任何产品，而不管价格如何。</p>
 
-<h1 id="section-5">二、匹配搜索</h1>
+<h1 id="section-4">二、匹配搜索</h1>
 
-<h1 id="section-6">三、数据处理函数</h1>
+<h4 id="like"><strong>Like操作符</strong></h4>
 
-<h1 id="section-7">四、分组与汇总</h1>
+<p>由字面值、通配符或两者组合构成搜索条件。</p>
 
-<h1 id="section-8">五、子查询</h1>
+<div class="highlighter-rouge"><pre class="highlight"><code>select prod_id,prod_name
+from products
+where prod_name Like '%anvil%';   
+</code></pre>
+</div>
 
-<h1 id="section-9">六、联结与组合查询</h1>
+<p><strong>注意：</strong></p>
 
-<h1 id="section-10">七、视图</h1>
+<ul>
+  <li>搜索区分大小写</li>
+  <li>注意去掉为空格，否则会出现匹配不正确</li>
+  <li>
+    <p>%可以匹配任何东西，但NULL除外</p>
 
-<h1 id="section-11">八、存储过程</h1>
+    <div class="highlighter-rouge"><pre class="highlight"><code>where prod_name like ‘%’;   //不能匹配值为NULL的长产品行。
+</code></pre>
+    </div>
+  </li>
+</ul>
 
-<h1 id="section-12">九、游标</h1>
+<h4 id="section-5"><strong>_操作符</strong></h4>
+<p>下划线的用途和%类似，但下划线只能匹配单个字符，不能多也不能少，而不是任意个字符。</p>
 
-<h1 id="section-13">十、触发器</h1>
+<h4 id="section-6"><strong>使用通配符的技巧</strong></h4>
 
-<h1 id="section-14">十一、事务管理</h1>
+<ul>
+  <li>不要过度使用通配符。如果其他操作符能达到相同的目的，应该使用其他操作符。</li>
+  <li>在确定需要使用通配符时，除非绝对有必要，否则不要把它们用在搜索模式的开始处。把通配符置于搜索模式的开始处，搜索起来是最慢的。</li>
+</ul>
 
-<h1 id="section-15">十二、性能优化</h1>
+<h4 id="regexp"><strong>正则表达式REGEXP匹配</strong></h4>
+<p>以下例子检索列包含prod_name包含文本1000的所有行。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>select prod_name
+from products
+where prod_name REGEXP '1000'
+order by prod_name;
+</code></pre>
+</div>
+
+<p><strong>注意：</strong></p>
+
+<ul>
+  <li>’.’匹配任意一个字符</li>
+  <li>
+    <p>匹配不区分大小写,为了区分大小写，可以使用BINARY关键字</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>where prod_name REGEXP BINARY 'JetPack .000';  
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<p><strong>OR匹配</strong><br />
+	‘|’相当于OR条件，例如：‘1000｜2000｜3000’ <br />
+<strong>匹配几个字符之一</strong> <br />
+使用’[ ]’匹配几个字符之一，［123］为［1｜2｜3］的缩写。</p>
+
+<p><strong>匹配范围</strong> <br />
+使用［0-9］代替［0123456789］，［a-z］任意字母字符</p>
+
+<p><strong>匹配特殊字符</strong> <br />
+需要匹配’.’等特殊字符的时候需要使用’\.’进行匹配。包括’.’、’|’、’[‘、’]’、’'都需要同样处理。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>元字符</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>\\f</td>
+      <td>换页</td>
+    </tr>
+    <tr>
+      <td>\\n</td>
+      <td>换行</td>
+    </tr>
+    <tr>
+      <td>\\r</td>
+      <td>回车</td>
+    </tr>
+    <tr>
+      <td>\\t</td>
+      <td>制表</td>
+    </tr>
+    <tr>
+      <td>\\v</td>
+      <td>纵向制表</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>匹配字符类</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>类</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>[:alnum:]</td>
+      <td>任意字母和数字（同[a-zA-Z0-9]）</td>
+    </tr>
+    <tr>
+      <td>[:alpha:]</td>
+      <td>任意字符（同[a-zA-Z]）</td>
+    </tr>
+    <tr>
+      <td>[:blank:]</td>
+      <td>空格和制表符同（[\\t]）</td>
+    </tr>
+    <tr>
+      <td>[:cntrl:]</td>
+      <td>ASCII控制字符（ASCII0到31和127）</td>
+    </tr>
+    <tr>
+      <td>[:digit:]</td>
+      <td>任意数字（同[0-9]）</td>
+    </tr>
+    <tr>
+      <td>[:graph:]</td>
+      <td>与[:print:]相同，但不包括空格）</td>
+    </tr>
+    <tr>
+      <td>[:lower:]</td>
+      <td>任意消小写字母（同[a-z]）</td>
+    </tr>
+    <tr>
+      <td>[:print:]</td>
+      <td>任意可打印字符</td>
+    </tr>
+    <tr>
+      <td>[:punct:]</td>
+      <td>既不在[:alnum:]又不在[:cntrl:]中的任意字符</td>
+    </tr>
+    <tr>
+      <td>[:space:]</td>
+      <td>包括空格在内的任意空白字符（同[\\f\\n\\r\\t\\v]）</td>
+    </tr>
+    <tr>
+      <td>[:upper:]</td>
+      <td>任意大写字母（同[A-Z]）</td>
+    </tr>
+    <tr>
+      <td>[:xdigit:]</td>
+      <td>任意十六进制数字（同[a-fA－F0-9]）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>定位符</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>元字符</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>^</td>
+      <td>文本的开始</td>
+    </tr>
+    <tr>
+      <td>$</td>
+      <td>文本的结尾</td>
+    </tr>
+    <tr>
+      <td>[ [:&lt;:] ]</td>
+      <td>词的开始</td>
+    </tr>
+    <tr>
+      <td>[ [:&gt;:] ]</td>
+      <td>词的结尾</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>注意：</strong></p>
+
+<ul>
+  <li>^的双重用途，在集合中[ ] ,用来否定该集合，否则，用来指串的开始。</li>
+  <li>REGEXP总是返回0（没有匹配）或者1（匹配）</li>
+</ul>
+
+<p><strong>匹配多个实例</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>元字符</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>*</td>
+      <td>0个或多个匹配</td>
+    </tr>
+    <tr>
+      <td>+</td>
+      <td>1个或多个匹配（等于{1,}）</td>
+    </tr>
+    <tr>
+      <td>?</td>
+      <td>0个或1个匹配（等于{0,1}）</td>
+    </tr>
+    <tr>
+      <td>{n}</td>
+      <td>指定数目的匹配</td>
+    </tr>
+    <tr>
+      <td>{n,}</td>
+      <td>不少于指定数目的匹配</td>
+    </tr>
+    <tr>
+      <td>{n,m}</td>
+      <td>匹配数目的范围（m不超过255）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="section-7">三、数据处理函数</h1>
+
+<h1 id="section-8">四、分组与汇总</h1>
+
+<h1 id="section-9">五、子查询</h1>
+
+<h1 id="section-10">六、联结与组合查询</h1>
+
+<h1 id="section-11">七、视图</h1>
+
+<h1 id="section-12">八、存储过程</h1>
+
+<h1 id="section-13">九、游标</h1>
+
+<h1 id="section-14">十、触发器</h1>
+
+<h1 id="section-15">十一、事务管理</h1>
+
+<h1 id="section-16">十二、性能优化</h1>
 
 
   </div>
