@@ -6,13 +6,154 @@
 </description>
     <link>http://caterzhong.com/</link>
     <atom:link href="http://caterzhong.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 01 Apr 2016 21:28:42 +0800</pubDate>
-    <lastBuildDate>Fri, 01 Apr 2016 21:28:42 +0800</lastBuildDate>
+    <pubDate>Mon, 20 Jun 2016 21:27:21 +0800</pubDate>
+    <lastBuildDate>Mon, 20 Jun 2016 21:27:21 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
+        <title>Git基础</title>
+        <description>&lt;p&gt;Git是当今最为先进的分布式版本控制系统之一，当前国内大部分互联网都在使用。一直以来，我都是皮毛式地使用Git，到实习了才发现这Git，只要你身处互联网，是不得不熟悉啊！难度抽出点时间，必须好好总结一下。
+&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;git&quot;&gt;一、Git基础&lt;/h1&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;&lt;strong&gt;三个工作区域&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;Git中有三个工作区域：工作区（Working directory）、暂存区（staging directory）和仓库（Git directory）。一般工作流程：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在工作区添加或修改文件，状态：已修改(modified)&lt;/li&gt;
+  &lt;li&gt;使用git add命令添加到暂存去，状态：已暂存(staged)&lt;/li&gt;
+  &lt;li&gt;使用git commit命令添加到仓库，状态：已提交(commited)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;工作区就是我们平时写代码的目录，当我们修改文件后通过git add以快照的形式暂存在暂存区中，暂存区域只不过是个简单的文件,一般都放在 git 目录中。仓库则是Git最重要的部分，以数据链的形式不同的commit对象。并且只有一个HEAD指针指向正在工作的分支。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://marklodato.github.io/visual-git-guide/conventions.svg&quot; alt=&quot;Git 仓库&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;&lt;strong&gt;文件保存&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;Git区别于其他版本控制系统，Git只关心数据的整体是否变化，而大多数其他系统则关心文件内容的具体差异。这类系统（CVS）等每次纪录有哪些文件做了更新，以及都更新了哪些行的内容。而Git并不保存这些前后变化的差异数据，只对变化的文件作快照后，记录在一个微型的文件系统中，若文件没有变化，则对上次保存的快照作一链接。&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;img src=&quot;https://git-scm.com/book/en/v2/book/01-introduction/images/snapshots.png&quot; alt=&quot;Git 文件保存&quot; /&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section-2&quot;&gt;二、基本用法&lt;/h1&gt;
+
+&lt;h4 id=&quot;section-3&quot;&gt;&lt;strong&gt;文件在工作区间的转换&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/basic-usage.svg&quot; alt=&quot;Git 工作区间的转换&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;以上的四条命令在工作区、暂存区（也叫索引）和仓库间转换（文件快照）。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;git add files: 把当前修改的文件加入到暂存区&lt;/li&gt;
+  &lt;li&gt;git commit -m “描述内容”: 把暂存区的内容提交到仓库&lt;/li&gt;
+  &lt;li&gt;git reset -- files: 撤销暂存区文件，用来撤销git add操作&lt;/li&gt;
+  &lt;li&gt;git checkout -- files: 把文件从暂存区府复制到工作区，用来丢弃本地修改（没有add到暂存区）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;也可以跳过暂存区直接从工作区提交文件到仓库或反之。
+&lt;br /&gt;&lt;br /&gt;
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/basic-usage-2.svg&quot; alt=&quot;Git 工作区间的转换&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;git commit -a -m “描述内容”: 相当于git add ＋ git commit －m&lt;/li&gt;
+  &lt;li&gt;git checkout HEAD – files: 把仓库HEAD指向的快照复制到暂存区和工作区&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section-4&quot;&gt;三、命令详解&lt;/h1&gt;
+
+&lt;h4 id=&quot;section-5&quot;&gt;&lt;strong&gt;基础状态&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;http://marklodato.github.io/visual-git-guide/conventions.svg&quot; alt=&quot;Git 文件目录&quot; /&gt;
+&lt;br /&gt;
+下面命令以上图为基础，绿色的5位字符表示提交的ID，分别指向父节点。分支用橘色显示，分别指向特定的提交。当前分支由附在其上的HEAD标识。 这张图片里显示最后5次提交，ed489是最新提交。 master分支指向此次提交，另一个maint分支指向祖父提交节点。&lt;/p&gt;
+
+&lt;h4 id=&quot;diff&quot;&gt;&lt;strong&gt;diff&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/diff.svg&quot; alt=&quot;Git diff&quot; /&gt;
+&lt;br /&gt;
+使用git diff 可以查看工作区与暂存区，暂存区与仓库，两次提交间的不同，加文件名可以指定文件的不同。&lt;/p&gt;
+
+&lt;h4 id=&quot;commit&quot;&gt;&lt;strong&gt;commit&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;提交时，git用暂存区域的文件创建一个新的提交，并把此时的节点设为父节点。然后把当前分支指向新的提交节点。下图中，当前分支是master。 在运行命令之前，master指向ed489，提交后，master指向新的节点f0cec并以ed489作为父节点。
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/commit-master.svg&quot; alt=&quot;Git commit&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果想更改一次提交，使用 git commit –amend。git会使用与当前提交相同的父节点进行一次新提交，旧的提交会被取消。
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/commit-amend.svg&quot; alt=&quot;Git commit&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;checkout&quot;&gt;&lt;strong&gt;Checkout&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;‘git checkout’ 命令多用于切换分支或者从历史提交（或者暂存区域）中拷贝文件到工作区（或者也拷贝到暂存区）
+当给定某个文件名（或者打开-p选项，或者文件名和-p选项同时打开）时，git会从指定的提交中拷贝文件到暂存区域和工作目录。比如，git checkout HEAD~ foo.c会将提交节点HEAD~(即当前提交节点的父节点)中的foo.c复制到工作目录并且加到暂存区域中。（如果命令中没有指定提交节点，则会从暂存区域中拷贝内容。）注意当前分支不会发生变化。
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/checkout-files.svg&quot; alt=&quot;Git checkout拷贝文件&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当不指定文件名，而是给出一个（本地）分支时，那么HEAD标识会移动到那个分支（也就是说，我们“切换”到那个分支了），然后暂存区域和工作目录中的内容会和HEAD对应的提交节点一致。新提交节点（下图中的a47c3）中的所有文件都会被复制（到暂存区域和工作目录中）；只存在于老的提交节点（ed489）中的文件会被删除；不属于上述两者的文件会被忽略，不受影响。
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/checkout-branch.svg&quot; alt=&quot;Git checkout切换分支&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果既没有指定文件名，也没有指定分支名，而是一个标签、远程分支、SHA-1值或者是像master~3类似的东西，就得到一个匿名分支，称作detached HEAD（被分离的HEAD标识）。这样可以很方便地在历史版本之间互相切换。比如说你想要编译1.6.6.1版本的git，你可以运行git checkout v1.6.6.1（这是一个标签，而非分支名），编译，安装，然后切换回另一个分支，比如说git checkout master。然而，当提交操作涉及到“分离的HEAD”时，其行为会略有不同，详情见在下面。
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/checkout-detached.svg&quot; alt=&quot;Git checkout匿名分支&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;reset&quot;&gt;&lt;strong&gt;reset&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;reset命令把当前分支指向另一个位置，并且有选择的变动工作目录和索引。也用来在从历史仓库中复制文件到索引(暂存区)，而不动工作目录。
+如果不给选项，那么当前分支指向到那个提交。如果用&lt;code class=&quot;highlighter-rouge&quot;&gt;--hard&lt;/code&gt;选项，那么工作目录也更新，如果用–soft选项，那么都不变。
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/reset-commit.svg&quot; alt=&quot;Git reset改变HEAD指向和暂存区&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果没有给出提交点的版本号，那么默认用HEAD。这样，分支指向不变，但是索引会回滚到最后一次提交，如果用–hard选项，工作目录也同样。
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/reset.svg&quot; alt=&quot;Git reset改变HEAD指向和暂存区&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果给了文件名(或者 -p选项), 那么工作效果和带文件名的checkout差不多，除了索引被更新。
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/reset-files.svg&quot; alt=&quot;Git reset改变HEAD指向和暂存区&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;merge&quot;&gt;&lt;strong&gt;merge&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;merge 命令把不同分支合并起来。合并前，索引必须和当前提交相同。如果另一个分支是当前提交的祖父节点，那么合并命令将什么也不做。 另一种情况是如果当前提交是另一个分支的祖父节点，就导致fast-forward合并。指向只是简单的移动，并生成一个新的提交。
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/merge-ff.svg&quot; alt=&quot;Git merge&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;否则就是一次真正的合并。默认把当前提交(ed489 如下所示)和另一个提交(33104)以及他们的共同祖父节点(b325c)进行一次三方合并。结果是先保存当前目录和索引，然后和父节点33104一起做一次新提交。
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/merge.svg&quot; alt=&quot;Git merge&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;cherry-pick&quot;&gt;&lt;strong&gt;cherry Pick&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;cherry-pick命令&lt;code class=&quot;highlighter-rouge&quot;&gt;复制&lt;/code&gt;一个提交节点并在当前分支做一次完全一样的新提交。
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/cherry-pick.svg&quot; alt=&quot;Git cherry－pick&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;rebase&quot;&gt;&lt;strong&gt;rebase&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;衍合是合并命令的另一种选择。合并把两个父分支合并进行一次提交，提交历史不是线性的。衍合在当前分支上重演另一个分支的历史，提交历史是线性的。 本质上，这是线性化的自动的 cherry-pick
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/rebase.svg&quot; alt=&quot;Git cherry－pick&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上面的命令都在topic分支中进行，而不是master分支，在master分支上重演，并且把分支指向新的节点。注意旧提交没有被引用，将被回收。
+要限制回滚范围，使用–onto选项。下面的命令在master分支上重演当前分支从169a6以来的最近几个提交，即2c33a。
+&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/rebase-onto.svg&quot; alt=&quot;Git cherry－pick&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;引自－&lt;a href=&quot;https://marklodato.github.io/visual-git-guide/index-zh-cn.html&quot;&gt;图解Git&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 10 Jun 2016 19:05:56 +0800</pubDate>
+        <link>http://caterzhong.com/2016/06/10/Git%E5%9F%BA%E7%A1%80</link>
+        <guid isPermaLink="true">http://caterzhong.com/2016/06/10/Git%E5%9F%BA%E7%A1%80</guid>
+        
+        <category>technology</category>
+        
+        
+        <category>study-git</category>
+        
+      </item>
+    
+      <item>
         <title>MySQL学习笔记</title>
-        <description>&lt;p&gt;数据库作为数据的存储，在软件系统中占据着不可替代的作用，而数据存储的速度在某种程度上决定了数据交互的速率。本人多次使用MySQL数据库却一直没有去对它进行比较深入的了解，这段时间趁着有时间，把MySQL的知识学习了一下，希望以后能够写些高效一点的SQL语句。&lt;!-- more --&gt;&lt;/p&gt;
+        <description>&lt;style&gt;
+	table {
+		width: 100%;
+		border: 1px solid #dddddd;
+		border-collapse: collapse;
+		margin-bottom: 20px;
+	}
+	th, td {
+		border: 1px solid #dddddd;
+		padding: 5px;
+		font-size: 0.8rem;
+		text-align: center;
+	}
+&lt;/style&gt;
+
+&lt;p&gt;数据库作为数据的存储，在软件系统中占据着不可替代的作用，而数据存储的速度在某种程度上决定了数据交互的速率。本人多次使用MySQL数据库却一直没有去对它进行比较深入的了解，这段时间趁着有时间，把MySQL的知识学习了一下，希望以后能够写些高效一点的SQL语句。&lt;!-- more --&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;section&quot;&gt;一、基本操作&lt;/h1&gt;
 
@@ -573,6 +714,8 @@ having count(*) &amp;gt;= 2;
         <pubDate>Tue, 15 Mar 2016 21:05:56 +0800</pubDate>
         <link>http://caterzhong.com/2016/03/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0</link>
         <guid isPermaLink="true">http://caterzhong.com/2016/03/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0</guid>
+        
+        <category>technology</category>
         
         
         <category>study-database</category>
