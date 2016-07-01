@@ -6,13 +6,101 @@
 </description>
     <link>http://caterzhong.com/</link>
     <atom:link href="http://caterzhong.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 20 Jun 2016 21:27:21 +0800</pubDate>
-    <lastBuildDate>Mon, 20 Jun 2016 21:27:21 +0800</lastBuildDate>
+    <pubDate>Sat, 02 Jul 2016 00:56:18 +0800</pubDate>
+    <lastBuildDate>Sat, 02 Jul 2016 00:56:18 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
+        <title>浅谈TCP</title>
+        <description>&lt;p&gt;TCP是互联网最重要的协议之一，是一种面向连接的、可靠的、基于字节流的传输层通信协议。文章主要介绍TCP协议的特点与目的，同时从TCP保证传输可靠的几个重要方面展开。
+&lt;!-- more --&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section&quot;&gt;一、综述&lt;/h1&gt;
+
+&lt;p&gt;TCP(Transmission Control Protocol 传输控制协议)，位于ISO七层协议的传输层（第四层），是一种面向链接、基于字节流的通信协议，通过检验和、序列号、确认应答、重发控制
+、连接管理和窗口控制等机制提供可靠性服务。
+&lt;br /&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/tcpHeader.png&quot; alt=&quot;TCP首部&quot; /&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;二、连接管理&lt;/h1&gt;
+&lt;p&gt;TCP提供面向连接的通信传输，在数据通信开始前必须先做好通信两端的准备工作，通过三次握手建立连接。同时结束通信的时候，也需要两端断开，四次挥手断开连接。所以一个连接的建立与断开，正常过程需要来回发送7个包才能完成。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-2&quot;&gt;&lt;strong&gt;三次握手&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;一般情况，TCP中发送第一个SYN包的一方称为客户端，接受这个包的一方称为服务端。
+在连接建立的时候，客户端首先向服务器发送SYN包请求建立连接，服务端接收到包后，向客服端发送ACK和SYN包，确认准备好连接的同时向客户端发出连接请求，最后客户端接收到包后向服务端发送ACK确认应答，连接正式建立。
+&lt;br /&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/shakeHands.png&quot; alt=&quot;TCP三次握手&quot; /&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;section-3&quot;&gt;&lt;strong&gt;四次挥手&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;连接的一方（一般为客户端）再没有数据发送的时候释放连接，向服务端发送FIN包，服务端收到之后，向客户端发送ACK应答包，此时只是表明客户端不在发送数据，但可能接受服务端发送的数据。当服务端也没有数据发送的时候，同样发客户端发送FIN包，最后客户端接受到之后，返回ACK应答包，至此，连接断开。
+&lt;br /&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/wave.png&quot; alt=&quot;TCP四次挥手&quot; /&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section-4&quot;&gt;三、序列号与确认应答&lt;/h1&gt;
+&lt;p&gt;序列号是按照顺序给发送数据的每一个字节(8bit)都标上号码的编号，序列号的初始值并非为0，而是在建立连接之后由随机数声称，而后面的计算则是对每一字节加一。接受端查询接收数据TCP首部中的序列号和数据的长度，将自己下一步应该接收的序号作为确认应答返送回去。&lt;/p&gt;
+
+&lt;p&gt;在TCP发送数据过程中，发送数据的一方在TCP报文首部加入了序列号，如2712239079。接收端接收到数据后，向发送端返回确认应答号，这个号码为发送的序列号＋已经数据长度，表明下一个应该接受的字节为***。同时将TCP首部中的确认位(ACK)置为1，表明这个包是一个确认应答。
+&lt;br /&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/tcpack_1.png&quot; alt=&quot;TCP确认应答&quot; /&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;以下是TCP发送与接收数据截图：
+&lt;br /&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/tcpack_2.png&quot; alt=&quot;TCP确认应答&quot; /&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;我们注意看序列号和确认号的值！该数据包中，序列号为2712239079，确认号为1288781509，这和三次握手的第三步的数据包中的序列号和确认号相同。
+从上图中看出这个数据包的大小为1018字节，其中减去14字节Ethernet报头，20字节的IP报头，20字节的TCP报头和4字节的FCS （1018-14-20-20-4=960），得到传输的数据大小为1432。我们将该数据包中的序列号加上该数据大小（即2712239079+960 =2712240039），发现与“下一个序列号”的值完全吻合，也就是下一个数据包中服务器发送给客户端的数据包中的确认号，如下图所示。
+&lt;br /&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/tcpack_3.png&quot; alt=&quot;TCP确认应答&quot; /&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section-5&quot;&gt;四、超时重发&lt;/h1&gt;
+&lt;p&gt;TCP数据发送端在发送数据的时候，把该数据包加入到超时重发队列里面，同时启动重发计时器，如果在规定时间内，没有收到接受端的确认应答，则重发数据包。理想情况下的重发时间，应该满足随着网络情况的不同而变化，在高速的LAN中时间相对端，而在长距离通信或者网络拥堵的时候重发时间较长。&lt;/p&gt;
+
+&lt;p&gt;为保证能在不同网络环境下都提供高性能通信，TCP在每次发包的时候都会计算往返时间(RTT Round Trip Time)及其偏差(RTT时间波动的值、方差，也称为抖动)，然后根据RTT及其方差使用自适应算法(这里不展开算法详情)去重新计算重发时间，重发时间需要比RTT平均值大。&lt;/p&gt;
+
+&lt;p&gt;偏差的最小值为0.5秒，在Unix和Windows中，超时都以0.5秒为单位，重发超时都是0.5秒的整数倍。在最初的数据包发送中，不知道往返时间，一般重发超时设置为6s。当数据重发之后，等待确认应答的时间将以2倍，4倍的指数式增长。重发达到一定次数后，如果还没有收到任何确认应答，就会判断为网络异常，强制关闭连接，并通知应用通信异常强行终止。&lt;/p&gt;
+
+&lt;h1 id=&quot;section-6&quot;&gt;五、以段为单位发送数据&lt;/h1&gt;
+&lt;p&gt;在建立TCP连接的同时，也确定发送数据包的单位，称为“最大消息长度”(MSS: Maximum Segment Size)。最理想的情况时，最大消息长度正好是IP中不会被分片处理的最大数据长度。TCP在发送数据时，以MSS的大小将数据进行分割发送，重发时也以MSS为单位。&lt;/p&gt;
+
+&lt;p&gt;在三次握手时，双方会在TCP首部写入MSS选项，告诉对方自己的接口能够适应的MSS大小。然后在两者间选择较小者的值投入使用。如果缺省，可以选IP包长度不超过576字节的值(IP首部20字节，TCP首部20字节，MSS 536字节)
+	注意：为附加mSS选项，TCP首部将不再是20字节，而是4的整数倍(一般多加4字节).
+&lt;br /&gt;&lt;br /&gt;
+&lt;img src=&quot;/images/mss.png&quot; alt=&quot;mss&quot; /&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section-7&quot;&gt;六、窗口控制与快重传&lt;/h1&gt;
+&lt;p&gt;TCP以1个段为单位，每发一个段进行一次应答，这样的传输导致包的往返时间越长通信性能越低。因此引入窗口概念提高性能，计时在往返时间较长情况下，也能控制网络性能的下降。发送端主机在发送一个段以后不必再一直等待确认应答，而是继续发送，直到窗口大小限制。&lt;/p&gt;
+
+&lt;p&gt;窗口大小就是指无需等待确认应答而可以继续发送数据的最大值，如图窗口大小为4个段。这个机制实现通过使用大量的缓冲区，通常是在内存开辟一部分空间，作为缓冲区存放已经发送但未收到确认应答的数据。&lt;/p&gt;
+
+&lt;p&gt;窗口控制使用滑动形式，如下图圈起的部分，窗口内的数据&lt;/p&gt;
+
+&lt;h1 id=&quot;section-8&quot;&gt;七、流控制&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-9&quot;&gt;八、拥塞控制&lt;/h1&gt;
+
+&lt;h1 id=&quot;section-10&quot;&gt;九、提高网络利用率的规范&lt;/h1&gt;
+</description>
+        <pubDate>Wed, 15 Jun 2016 16:05:56 +0800</pubDate>
+        <link>http://caterzhong.com/2016/06/15/%E8%BD%BB%E8%B0%88TCP</link>
+        <guid isPermaLink="true">http://caterzhong.com/2016/06/15/%E8%BD%BB%E8%B0%88TCP</guid>
+        
+        <category>technology</category>
+        
+        
+        <category>study-network</category>
+        
+      </item>
+    
+      <item>
         <title>Git基础</title>
-        <description>&lt;p&gt;Git是当今最为先进的分布式版本控制系统之一，当前国内大部分互联网都在使用。一直以来，我都是皮毛式地使用Git，到实习了才发现这Git，只要你身处互联网，是不得不熟悉啊！难度抽出点时间，必须好好总结一下。
+        <description>&lt;p&gt;Git是当今最为先进的分布式版本控制系统之一，当前国内大部分互联网都在使用。一直以来，我都是皮毛式地使用Git，到实习了才发现这Git，只要你身处互联网，是不得不熟悉啊！难得抽出点时间，好好总结一下Git常用的命令的用法。
 &lt;!-- more --&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;git&quot;&gt;一、Git基础&lt;/h1&gt;

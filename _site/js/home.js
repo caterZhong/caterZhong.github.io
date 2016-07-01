@@ -34,8 +34,10 @@ $(function(){
 		// console.log(x);
 		if(x>150 && $(document).width()<=768){
 			$(".blog-nav").addClass("down");
+			$(".blog-nav").removeClass("up");
 		}else{
 			$(".blog-nav").removeClass("down");
+			$(".blog-nav").addClass("up");
 		}
 		if(x>150){
 			$(".scrollToTop").fadeIn();
