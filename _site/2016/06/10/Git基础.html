@@ -11,8 +11,8 @@
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/home.css">
-  <link rel="canonical" href="http://caterzhong.com/2016/06/10/Git%E5%9F%BA%E7%A1%80">
-  <link rel="alternate" type="application/rss+xml" title="Cater's blog" href="http://caterzhong.com/feed.xml">
+  <link rel="canonical" href="http://localhost:4000/2016/06/10/Git%E5%9F%BA%E7%A1%80">
+  <link rel="alternate" type="application/rss+xml" title="Cater's blog" href="http://localhost:4000/feed.xml">
   
 
 </head>
@@ -102,9 +102,9 @@
     <p>Git是当今最为先进的分布式版本控制系统之一，当前国内大部分互联网都在使用。一直以来，我都是皮毛式地使用Git，到实习了才发现这Git，只要你身处互联网，是不得不熟悉啊！难得抽出点时间，好好总结一下Git常用的命令的用法。
 <!-- more --></p>
 
-<h1 id="git">一、Git基础</h1>
+<h1 id="一git基础">一、Git基础</h1>
 
-<h4 id="section"><strong>三个工作区域</strong></h4>
+<h4 id="三个工作区域"><strong>三个工作区域</strong></h4>
 
 <p>Git中有三个工作区域：工作区（Working directory）、暂存区（staging directory）和仓库（Git directory）。一般工作流程：</p>
 
@@ -118,16 +118,16 @@
 
 <p><img src="http://marklodato.github.io/visual-git-guide/conventions.svg" alt="Git 仓库" /></p>
 
-<h4 id="section-1"><strong>文件保存</strong></h4>
+<h4 id="文件保存"><strong>文件保存</strong></h4>
 <p>Git区别于其他版本控制系统，Git只关心数据的整体是否变化，而大多数其他系统则关心文件内容的具体差异。这类系统（CVS）等每次纪录有哪些文件做了更新，以及都更新了哪些行的内容。而Git并不保存这些前后变化的差异数据，只对变化的文件作快照后，记录在一个微型的文件系统中，若文件没有变化，则对上次保存的快照作一链接。</p>
 
 <p><br />
 <img src="https://git-scm.com/book/en/v2/book/01-introduction/images/snapshots.png" alt="Git 文件保存" />
 <br /><br /><br /></p>
 
-<h1 id="section-2">二、基本用法</h1>
+<h1 id="二基本用法">二、基本用法</h1>
 
-<h4 id="section-3"><strong>文件在工作区间的转换</strong></h4>
+<h4 id="文件在工作区间的转换"><strong>文件在工作区间的转换</strong></h4>
 <p><img src="https://marklodato.github.io/visual-git-guide/basic-usage.svg" alt="Git 工作区间的转换" /></p>
 
 <p>以上的四条命令在工作区、暂存区（也叫索引）和仓库间转换（文件快照）。</p>
@@ -150,9 +150,9 @@
 
 <p><br /></p>
 
-<h1 id="section-4">三、命令详解</h1>
+<h1 id="三命令详解">三、命令详解</h1>
 
-<h4 id="section-5"><strong>基础状态</strong></h4>
+<h4 id="基础状态"><strong>基础状态</strong></h4>
 <p><img src="http://marklodato.github.io/visual-git-guide/conventions.svg" alt="Git 文件目录" />
 <br />
 下面命令以上图为基础，绿色的5位字符表示提交的ID，分别指向父节点。分支用橘色显示，分别指向特定的提交。当前分支由附在其上的HEAD标识。 这张图片里显示最后5次提交，ed489是最新提交。 master分支指向此次提交，另一个maint分支指向祖父提交节点。</p>
@@ -255,7 +255,7 @@
 
         <!-- 歌曲信息 -->
         <div class="song-info">
-          <div class="song-info-content">南山南－cater</div>
+          <div id="song_info" class="song-info-content">南山南－cater</div>
           <div class="song-time">
             <div class="player-position-time">00:00</div>
             <div class="player-progress">
@@ -298,7 +298,8 @@
     <div class="mask"></div>
     <!-- 回到顶部结束     -->
     <footer class="blog-footer">
-  Made By Cater @ 2015 
+  Made By Cater @ 2015 <br/>
+  <a href="http://www.beian.miit.gov.cn/" target=_blank>粤ICP备19055501号</a>
 </footer>
 
 

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cater&#39;s blog</title>
+    <title>Cater's blog</title>
     <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 </description>
-    <link>http://caterzhong.com/</link>
-    <atom:link href="http://caterzhong.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 02 Jul 2016 00:56:18 +0800</pubDate>
-    <lastBuildDate>Sat, 02 Jul 2016 00:56:18 +0800</lastBuildDate>
-    <generator>Jekyll v3.0.1</generator>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 26 May 2019 09:43:44 +0800</pubDate>
+    <lastBuildDate>Sun, 26 May 2019 09:43:44 +0800</lastBuildDate>
+    <generator>Jekyll v3.5.0</generator>
     
       <item>
         <title>浅谈TCP</title>
         <description>&lt;p&gt;TCP是互联网最重要的协议之一，是一种面向连接的、可靠的、基于字节流的传输层通信协议。文章主要介绍TCP协议的特点与目的，同时从TCP保证传输可靠的几个重要方面展开。
 &lt;!-- more --&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;section&quot;&gt;一、综述&lt;/h1&gt;
+&lt;h1 id=&quot;一综述&quot;&gt;一、综述&lt;/h1&gt;
 
 &lt;p&gt;TCP(Transmission Control Protocol 传输控制协议)，位于ISO七层协议的传输层（第四层），是一种面向链接、基于字节流的通信协议，通过检验和、序列号、确认应答、重发控制
 、连接管理和窗口控制等机制提供可靠性服务。
@@ -23,23 +23,23 @@
 &lt;img src=&quot;/images/tcpHeader.png&quot; alt=&quot;TCP首部&quot; /&gt;
 &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;section-1&quot;&gt;二、连接管理&lt;/h1&gt;
+&lt;h1 id=&quot;二连接管理&quot;&gt;二、连接管理&lt;/h1&gt;
 &lt;p&gt;TCP提供面向连接的通信传输，在数据通信开始前必须先做好通信两端的准备工作，通过三次握手建立连接。同时结束通信的时候，也需要两端断开，四次挥手断开连接。所以一个连接的建立与断开，正常过程需要来回发送7个包才能完成。&lt;/p&gt;
 
-&lt;h4 id=&quot;section-2&quot;&gt;&lt;strong&gt;三次握手&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;三次握手&quot;&gt;&lt;strong&gt;三次握手&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;一般情况，TCP中发送第一个SYN包的一方称为客户端，接受这个包的一方称为服务端。
 在连接建立的时候，客户端首先向服务器发送SYN包请求建立连接，服务端接收到包后，向客服端发送ACK和SYN包，确认准备好连接的同时向客户端发出连接请求，最后客户端接收到包后向服务端发送ACK确认应答，连接正式建立。
 &lt;br /&gt;&lt;br /&gt;
 &lt;img src=&quot;/images/shakeHands.png&quot; alt=&quot;TCP三次握手&quot; /&gt;
 &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;section-3&quot;&gt;&lt;strong&gt;四次挥手&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;四次挥手&quot;&gt;&lt;strong&gt;四次挥手&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;连接的一方（一般为客户端）再没有数据发送的时候释放连接，向服务端发送FIN包，服务端收到之后，向客户端发送ACK应答包，此时只是表明客户端不在发送数据，但可能接受服务端发送的数据。当服务端也没有数据发送的时候，同样发客户端发送FIN包，最后客户端接受到之后，返回ACK应答包，至此，连接断开。
 &lt;br /&gt;&lt;br /&gt;
 &lt;img src=&quot;/images/wave.png&quot; alt=&quot;TCP四次挥手&quot; /&gt;
 &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;section-4&quot;&gt;三、序列号与确认应答&lt;/h1&gt;
+&lt;h1 id=&quot;三序列号与确认应答&quot;&gt;三、序列号与确认应答&lt;/h1&gt;
 &lt;p&gt;序列号是按照顺序给发送数据的每一个字节(8bit)都标上号码的编号，序列号的初始值并非为0，而是在建立连接之后由随机数声称，而后面的计算则是对每一字节加一。接受端查询接收数据TCP首部中的序列号和数据的长度，将自己下一步应该接收的序号作为确认应答返送回去。&lt;/p&gt;
 
 &lt;p&gt;在TCP发送数据过程中，发送数据的一方在TCP报文首部加入了序列号，如2712239079。接收端接收到数据后，向发送端返回确认应答号，这个号码为发送的序列号＋已经数据长度，表明下一个应该接受的字节为***。同时将TCP首部中的确认位(ACK)置为1，表明这个包是一个确认应答。
@@ -58,14 +58,14 @@
 &lt;img src=&quot;/images/tcpack_3.png&quot; alt=&quot;TCP确认应答&quot; /&gt;
 &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;section-5&quot;&gt;四、超时重发&lt;/h1&gt;
+&lt;h1 id=&quot;四超时重发&quot;&gt;四、超时重发&lt;/h1&gt;
 &lt;p&gt;TCP数据发送端在发送数据的时候，把该数据包加入到超时重发队列里面，同时启动重发计时器，如果在规定时间内，没有收到接受端的确认应答，则重发数据包。理想情况下的重发时间，应该满足随着网络情况的不同而变化，在高速的LAN中时间相对端，而在长距离通信或者网络拥堵的时候重发时间较长。&lt;/p&gt;
 
 &lt;p&gt;为保证能在不同网络环境下都提供高性能通信，TCP在每次发包的时候都会计算往返时间(RTT Round Trip Time)及其偏差(RTT时间波动的值、方差，也称为抖动)，然后根据RTT及其方差使用自适应算法(这里不展开算法详情)去重新计算重发时间，重发时间需要比RTT平均值大。&lt;/p&gt;
 
 &lt;p&gt;偏差的最小值为0.5秒，在Unix和Windows中，超时都以0.5秒为单位，重发超时都是0.5秒的整数倍。在最初的数据包发送中，不知道往返时间，一般重发超时设置为6s。当数据重发之后，等待确认应答的时间将以2倍，4倍的指数式增长。重发达到一定次数后，如果还没有收到任何确认应答，就会判断为网络异常，强制关闭连接，并通知应用通信异常强行终止。&lt;/p&gt;
 
-&lt;h1 id=&quot;section-6&quot;&gt;五、以段为单位发送数据&lt;/h1&gt;
+&lt;h1 id=&quot;五以段为单位发送数据&quot;&gt;五、以段为单位发送数据&lt;/h1&gt;
 &lt;p&gt;在建立TCP连接的同时，也确定发送数据包的单位，称为“最大消息长度”(MSS: Maximum Segment Size)。最理想的情况时，最大消息长度正好是IP中不会被分片处理的最大数据长度。TCP在发送数据时，以MSS的大小将数据进行分割发送，重发时也以MSS为单位。&lt;/p&gt;
 
 &lt;p&gt;在三次握手时，双方会在TCP首部写入MSS选项，告诉对方自己的接口能够适应的MSS大小。然后在两者间选择较小者的值投入使用。如果缺省，可以选IP包长度不超过576字节的值(IP首部20字节，TCP首部20字节，MSS 536字节)
@@ -74,22 +74,22 @@
 &lt;img src=&quot;/images/mss.png&quot; alt=&quot;mss&quot; /&gt;
 &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;section-7&quot;&gt;六、窗口控制与快重传&lt;/h1&gt;
+&lt;h1 id=&quot;六窗口控制与快重传&quot;&gt;六、窗口控制与快重传&lt;/h1&gt;
 &lt;p&gt;TCP以1个段为单位，每发一个段进行一次应答，这样的传输导致包的往返时间越长通信性能越低。因此引入窗口概念提高性能，计时在往返时间较长情况下，也能控制网络性能的下降。发送端主机在发送一个段以后不必再一直等待确认应答，而是继续发送，直到窗口大小限制。&lt;/p&gt;
 
 &lt;p&gt;窗口大小就是指无需等待确认应答而可以继续发送数据的最大值，如图窗口大小为4个段。这个机制实现通过使用大量的缓冲区，通常是在内存开辟一部分空间，作为缓冲区存放已经发送但未收到确认应答的数据。&lt;/p&gt;
 
 &lt;p&gt;窗口控制使用滑动形式，如下图圈起的部分，窗口内的数据&lt;/p&gt;
 
-&lt;h1 id=&quot;section-8&quot;&gt;七、流控制&lt;/h1&gt;
+&lt;h1 id=&quot;七流控制&quot;&gt;七、流控制&lt;/h1&gt;
 
-&lt;h1 id=&quot;section-9&quot;&gt;八、拥塞控制&lt;/h1&gt;
+&lt;h1 id=&quot;八拥塞控制&quot;&gt;八、拥塞控制&lt;/h1&gt;
 
-&lt;h1 id=&quot;section-10&quot;&gt;九、提高网络利用率的规范&lt;/h1&gt;
+&lt;h1 id=&quot;九提高网络利用率的规范&quot;&gt;九、提高网络利用率的规范&lt;/h1&gt;
 </description>
         <pubDate>Wed, 15 Jun 2016 16:05:56 +0800</pubDate>
-        <link>http://caterzhong.com/2016/06/15/%E8%BD%BB%E8%B0%88TCP</link>
-        <guid isPermaLink="true">http://caterzhong.com/2016/06/15/%E8%BD%BB%E8%B0%88TCP</guid>
+        <link>http://localhost:4000/2016/06/15/%E8%BD%BB%E8%B0%88TCP</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/06/15/%E8%BD%BB%E8%B0%88TCP</guid>
         
         <category>technology</category>
         
@@ -103,9 +103,9 @@
         <description>&lt;p&gt;Git是当今最为先进的分布式版本控制系统之一，当前国内大部分互联网都在使用。一直以来，我都是皮毛式地使用Git，到实习了才发现这Git，只要你身处互联网，是不得不熟悉啊！难得抽出点时间，好好总结一下Git常用的命令的用法。
 &lt;!-- more --&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;git&quot;&gt;一、Git基础&lt;/h1&gt;
+&lt;h1 id=&quot;一git基础&quot;&gt;一、Git基础&lt;/h1&gt;
 
-&lt;h4 id=&quot;section&quot;&gt;&lt;strong&gt;三个工作区域&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;三个工作区域&quot;&gt;&lt;strong&gt;三个工作区域&lt;/strong&gt;&lt;/h4&gt;
 
 &lt;p&gt;Git中有三个工作区域：工作区（Working directory）、暂存区（staging directory）和仓库（Git directory）。一般工作流程：&lt;/p&gt;
 
@@ -119,16 +119,16 @@
 
 &lt;p&gt;&lt;img src=&quot;http://marklodato.github.io/visual-git-guide/conventions.svg&quot; alt=&quot;Git 仓库&quot; /&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;section-1&quot;&gt;&lt;strong&gt;文件保存&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;文件保存&quot;&gt;&lt;strong&gt;文件保存&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;Git区别于其他版本控制系统，Git只关心数据的整体是否变化，而大多数其他系统则关心文件内容的具体差异。这类系统（CVS）等每次纪录有哪些文件做了更新，以及都更新了哪些行的内容。而Git并不保存这些前后变化的差异数据，只对变化的文件作快照后，记录在一个微型的文件系统中，若文件没有变化，则对上次保存的快照作一链接。&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;
 &lt;img src=&quot;https://git-scm.com/book/en/v2/book/01-introduction/images/snapshots.png&quot; alt=&quot;Git 文件保存&quot; /&gt;
 &lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;section-2&quot;&gt;二、基本用法&lt;/h1&gt;
+&lt;h1 id=&quot;二基本用法&quot;&gt;二、基本用法&lt;/h1&gt;
 
-&lt;h4 id=&quot;section-3&quot;&gt;&lt;strong&gt;文件在工作区间的转换&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;文件在工作区间的转换&quot;&gt;&lt;strong&gt;文件在工作区间的转换&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&quot;https://marklodato.github.io/visual-git-guide/basic-usage.svg&quot; alt=&quot;Git 工作区间的转换&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;以上的四条命令在工作区、暂存区（也叫索引）和仓库间转换（文件快照）。&lt;/p&gt;
@@ -151,9 +151,9 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;section-4&quot;&gt;三、命令详解&lt;/h1&gt;
+&lt;h1 id=&quot;三命令详解&quot;&gt;三、命令详解&lt;/h1&gt;
 
-&lt;h4 id=&quot;section-5&quot;&gt;&lt;strong&gt;基础状态&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;基础状态&quot;&gt;&lt;strong&gt;基础状态&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&quot;http://marklodato.github.io/visual-git-guide/conventions.svg&quot; alt=&quot;Git 文件目录&quot; /&gt;
 &lt;br /&gt;
 下面命令以上图为基础，绿色的5位字符表示提交的ID，分别指向父节点。分支用橘色显示，分别指向特定的提交。当前分支由附在其上的HEAD标识。 这张图片里显示最后5次提交，ed489是最新提交。 master分支指向此次提交，另一个maint分支指向祖父提交节点。&lt;/p&gt;
@@ -214,8 +214,8 @@
 &lt;p&gt;引自－&lt;a href=&quot;https://marklodato.github.io/visual-git-guide/index-zh-cn.html&quot;&gt;图解Git&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 10 Jun 2016 19:05:56 +0800</pubDate>
-        <link>http://caterzhong.com/2016/06/10/Git%E5%9F%BA%E7%A1%80</link>
-        <guid isPermaLink="true">http://caterzhong.com/2016/06/10/Git%E5%9F%BA%E7%A1%80</guid>
+        <link>http://localhost:4000/2016/06/10/Git%E5%9F%BA%E7%A1%80</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/06/10/Git%E5%9F%BA%E7%A1%80</guid>
         
         <category>technology</category>
         
@@ -243,15 +243,15 @@
 
 &lt;p&gt;数据库作为数据的存储，在软件系统中占据着不可替代的作用，而数据存储的速度在某种程度上决定了数据交互的速率。本人多次使用MySQL数据库却一直没有去对它进行比较深入的了解，这段时间趁着有时间，把MySQL的知识学习了一下，希望以后能够写些高效一点的SQL语句。&lt;!-- more --&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;section&quot;&gt;一、基本操作&lt;/h1&gt;
+&lt;h1 id=&quot;一基本操作&quot;&gt;一、基本操作&lt;/h1&gt;
 
-&lt;h4 id=&quot;section-1&quot;&gt;&lt;strong&gt;检索不同的列&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;检索不同的列&quot;&gt;&lt;strong&gt;检索不同的列&lt;/strong&gt;&lt;/h4&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select distinct vend_id from products;     
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h4 id=&quot;section-2&quot;&gt;&lt;strong&gt;限制结果&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;限制结果&quot;&gt;&lt;strong&gt;限制结果&lt;/strong&gt;&lt;/h4&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select distinct vend_id from products limit 5;    
 &lt;/code&gt;&lt;/pre&gt;
@@ -260,7 +260,7 @@
 &lt;p&gt;limit 3,5 返回从行3开始的5行，第一个数为开始位置，第二个数为要检索的行数。默认一个数检索出来的第一行为行0而不是行1，因此limit 1,1将要检索出第二行而不是第一行。
 limit 4 offset 3，从行3开始的4行＝＝limit 3,4。&lt;/p&gt;
 
-&lt;h4 id=&quot;order-by&quot;&gt;&lt;strong&gt;排序(order by)&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;排序order-by&quot;&gt;&lt;strong&gt;排序(order by)&lt;/strong&gt;&lt;/h4&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select prod_name from products order by prod_name;
 &lt;/code&gt;&lt;/pre&gt;
@@ -269,7 +269,7 @@ limit 4 offset 3，从行3开始的4行＝＝limit 3,4。&lt;/p&gt;
 &lt;p&gt;降序：desc 升序：asc
 关于位置：order by子句应该保证出现在from子句之后，如果使用where的时候，order by需要位于where 之后，如果使用limit，limit必须位于order by之后，否则将产生错误信息.&lt;/p&gt;
 
-&lt;h4 id=&quot;where&quot;&gt;&lt;strong&gt;where子句过滤信息&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;where子句过滤信息&quot;&gt;&lt;strong&gt;where子句过滤信息&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;空值检查：is null/is not null&lt;/p&gt;
 
 &lt;p&gt;IN操作符：制定条件范围&lt;/p&gt;
@@ -289,7 +289,7 @@ order by prod_name;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h4 id=&quot;section-3&quot;&gt;&lt;strong&gt;计算次序&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;计算次序&quot;&gt;&lt;strong&gt;计算次序&lt;/strong&gt;&lt;/h4&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select prod_name,prod_price
 from products
 where vend_id = 1002 OR vend_id = 1003 And prod_price &amp;gt;= 10;   
@@ -298,15 +298,15 @@ where vend_id = 1002 OR vend_id = 1003 And prod_price &amp;gt;= 10;
 
 &lt;p&gt;结果发现返回的结果中🈶出现小于10美元的数据。原因是SQL(像多数语言一样)在处理OR操作符前，优先处理AND操作符。上述SQL语句应该理解为供应商1003制造的任何价格为10美元或以上的产品，或者是由供应商1002制造的任何产品，而不管价格如何。&lt;/p&gt;
 
-&lt;h1 id=&quot;section-4&quot;&gt;二、匹配搜索&lt;/h1&gt;
+&lt;h1 id=&quot;二匹配搜索&quot;&gt;二、匹配搜索&lt;/h1&gt;
 
-&lt;h4 id=&quot;like&quot;&gt;&lt;strong&gt;Like操作符&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;like操作符&quot;&gt;&lt;strong&gt;Like操作符&lt;/strong&gt;&lt;/h4&gt;
 
 &lt;p&gt;由字面值、通配符或两者组合构成搜索条件。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select prod_id,prod_name
 from products
-where prod_name Like &#39;%anvil%&#39;;   
+where prod_name Like '%anvil%';   
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -324,22 +324,22 @@ where prod_name Like &#39;%anvil%&#39;;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;section-5&quot;&gt;&lt;strong&gt;下划线(_)操作符&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;下划线_操作符&quot;&gt;&lt;strong&gt;下划线(_)操作符&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;下划线的用途和%类似，但下划线只能匹配单个字符，不能多也不能少，而不是任意个字符。&lt;/p&gt;
 
-&lt;h4 id=&quot;section-6&quot;&gt;&lt;strong&gt;使用通配符的技巧&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;使用通配符的技巧&quot;&gt;&lt;strong&gt;使用通配符的技巧&lt;/strong&gt;&lt;/h4&gt;
 
 &lt;ul&gt;
   &lt;li&gt;不要过度使用通配符。如果其他操作符能达到相同的目的，应该使用其他操作符。&lt;/li&gt;
   &lt;li&gt;在确定需要使用通配符时，除非绝对有必要，否则不要把它们用在搜索模式的开始处。把通配符置于搜索模式的开始处，搜索起来是最慢的。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;regexp&quot;&gt;&lt;strong&gt;正则表达式REGEXP匹配&lt;/strong&gt;&lt;/h4&gt;
+&lt;h4 id=&quot;正则表达式regexp匹配&quot;&gt;&lt;strong&gt;正则表达式REGEXP匹配&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;以下例子检索列包含prod_name包含文本1000的所有行。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select prod_name
 from products
-where prod_name REGEXP &#39;1000&#39;
+where prod_name REGEXP '1000'
 order by prod_name;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -351,7 +351,7 @@ order by prod_name;
   &lt;li&gt;
     &lt;p&gt;匹配不区分大小写,为了区分大小写，可以使用BINARY关键字&lt;/p&gt;
 
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;where prod_name REGEXP BINARY &#39;JetPack .000&#39;;  
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;where prod_name REGEXP BINARY 'JetPack .000';  
 &lt;/code&gt;&lt;/pre&gt;
     &lt;/div&gt;
   &lt;/li&gt;
@@ -366,7 +366,7 @@ order by prod_name;
 使用［0-9］代替［0123456789］，［a-z］任意字母字符&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;匹配特殊字符&lt;/strong&gt; &lt;br /&gt;
-需要匹配’.’等特殊字符的时候需要使用’\.’进行匹配。包括’.’、’|’、’[‘、’]’、’&#39;都需要同样处理。&lt;/p&gt;
+需要匹配’.’等特殊字符的时候需要使用’\.’进行匹配。包括’.’、’|’、’[‘、’]’、’'都需要同样处理。&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -533,7 +533,7 @@ order by prod_name;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h1 id=&quot;section-7&quot;&gt;三、数据处理函数&lt;/h1&gt;
+&lt;h1 id=&quot;三数据处理函数&quot;&gt;三、数据处理函数&lt;/h1&gt;
 &lt;p&gt;函数没有SQL的可移植性强，能使用其他方式实现最好不使用函数，使用函数的使用，应该保证做好代码注释。  &lt;br /&gt;
 &lt;strong&gt;文本处理函数&lt;/strong&gt;&lt;/p&gt;
 
@@ -592,7 +592,7 @@ order by prod_name;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;select cust_name,cust_contact
 from customers
-where Soundex(cust_contact) = Soundex(&#39;Y Lie&#39;);
+where Soundex(cust_contact) = Soundex('Y Lie');
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -678,7 +678,7 @@ where Soundex(cust_contact) = Soundex(&#39;Y Lie&#39;);
 &lt;/table&gt;
 
 &lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt; &lt;br /&gt;
-日期date的数据类型如果为datetime，这时候如果存储的值为2016-03－15 16:30:05则&lt;code class=&quot;highlighter-rouge&quot;&gt;where order_date =&#39;2016-03-15&#39;&lt;/code&gt;会出现检索失败。可以使用日期函数，或者使用范围替代。&lt;/p&gt;
+日期date的数据类型如果为datetime，这时候如果存储的值为2016-03－15 16:30:05则&lt;code class=&quot;highlighter-rouge&quot;&gt;where order_date ='2016-03-15'&lt;/code&gt;会出现检索失败。可以使用日期函数，或者使用范围替代。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;数值处理函数&lt;/strong&gt;&lt;/p&gt;
 
@@ -749,7 +749,7 @@ where Soundex(cust_contact) = Soundex(&#39;Y Lie&#39;);
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h1 id=&quot;section-8&quot;&gt;四、分组与汇总&lt;/h1&gt;
+&lt;h1 id=&quot;四分组与汇总&quot;&gt;四、分组与汇总&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;聚集函数&lt;/strong&gt; &lt;br /&gt;
 Avg()、Count()、Max()、Min()、Sum()  &lt;br /&gt;
 Avg()只能用来确定特定数值列的平均值，直接忽略NULL值的行 &lt;br /&gt;
@@ -780,28 +780,28 @@ having count(*) &amp;gt;= 2;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;section-9&quot;&gt;五、子查询&lt;/h1&gt;
+&lt;h1 id=&quot;五子查询&quot;&gt;五、子查询&lt;/h1&gt;
 
 &lt;p&gt;&lt;strong&gt;待续。。。&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;section-10&quot;&gt;六、联结与组合查询&lt;/h1&gt;
+&lt;h1 id=&quot;六联结与组合查询&quot;&gt;六、联结与组合查询&lt;/h1&gt;
 
-&lt;h1 id=&quot;section-11&quot;&gt;七、视图&lt;/h1&gt;
+&lt;h1 id=&quot;七视图&quot;&gt;七、视图&lt;/h1&gt;
 
-&lt;h1 id=&quot;section-12&quot;&gt;八、存储过程&lt;/h1&gt;
+&lt;h1 id=&quot;八存储过程&quot;&gt;八、存储过程&lt;/h1&gt;
 
-&lt;h1 id=&quot;section-13&quot;&gt;九、游标&lt;/h1&gt;
+&lt;h1 id=&quot;九游标&quot;&gt;九、游标&lt;/h1&gt;
 
-&lt;h1 id=&quot;section-14&quot;&gt;十、触发器&lt;/h1&gt;
+&lt;h1 id=&quot;十触发器&quot;&gt;十、触发器&lt;/h1&gt;
 
-&lt;h1 id=&quot;section-15&quot;&gt;十一、事务管理&lt;/h1&gt;
+&lt;h1 id=&quot;十一事务管理&quot;&gt;十一、事务管理&lt;/h1&gt;
 
-&lt;h1 id=&quot;section-16&quot;&gt;十二、性能优化&lt;/h1&gt;
+&lt;h1 id=&quot;十二性能优化&quot;&gt;十二、性能优化&lt;/h1&gt;
 
 </description>
         <pubDate>Tue, 15 Mar 2016 21:05:56 +0800</pubDate>
-        <link>http://caterzhong.com/2016/03/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0</link>
-        <guid isPermaLink="true">http://caterzhong.com/2016/03/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0</guid>
+        <link>http://localhost:4000/2016/03/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/03/15/MySQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0</guid>
         
         <category>technology</category>
         
@@ -818,8 +818,8 @@ having count(*) &amp;gt;= 2;
 
 </description>
         <pubDate>Wed, 30 Dec 2015 21:05:56 +0800</pubDate>
-        <link>http://caterzhong.com/2015/12/30/%E6%88%91%E4%B9%9F%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2%E5%95%A6</link>
-        <guid isPermaLink="true">http://caterzhong.com/2015/12/30/%E6%88%91%E4%B9%9F%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2%E5%95%A6</guid>
+        <link>http://localhost:4000/2015/12/30/%E6%88%91%E4%B9%9F%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2%E5%95%A6</link>
+        <guid isPermaLink="true">http://localhost:4000/2015/12/30/%E6%88%91%E4%B9%9F%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84%E7%8B%AC%E7%AB%8B%E5%8D%9A%E5%AE%A2%E5%95%A6</guid>
         
         <category>happy</category>
         
@@ -839,15 +839,15 @@ having count(*) &amp;gt;= 2;
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
   &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
 
 </description>
         <pubDate>Tue, 29 Dec 2015 16:05:56 +0800</pubDate>
-        <link>http://caterzhong.com/2015/12/29/welcome-to-jekyll</link>
-        <guid isPermaLink="true">http://caterzhong.com/2015/12/29/welcome-to-jekyll</guid>
+        <link>http://localhost:4000/2015/12/29/welcome-to-jekyll</link>
+        <guid isPermaLink="true">http://localhost:4000/2015/12/29/welcome-to-jekyll</guid>
         
         <category>jekyll</category>
         
